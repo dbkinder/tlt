@@ -1,6 +1,9 @@
-/* make the page width fill the window */
+/* make the page width use more of the window */
 .wy-nav-content {
        max-width: 1100px;
    }
 
-
+/* allow wrapping in a table */
+.wy-table-responsive table td, .wy-table-responsive table th {
+        white-space: normal !important;
+    }
