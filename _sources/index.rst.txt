@@ -1,0 +1,20 @@
+.. include:: ../README.md
+   :parser: myst_parser.sphinx_
+   :start-after: <!-- SkipBadges -->
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   Documentation Home <self>
+   GetStarted
+   Supported Models <Models>
+   DATASETS
+   distributed
+   notebooks
+   cli
+   api
+   docbuild
+   Legal
+   GitHub Repository <https://github.com/IntelAI/transfer-learning-tool>
+

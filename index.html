@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intel® Transfer Learning Tool &mdash; Intel® Transfer Learning Tool 0.2.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tlt-custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Get Started" href="GetStarted.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Intel® Transfer Learning Tool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Documentation Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GetStarted.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Models.html">Supported Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DATASETS.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="distributed.html">Distributed Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Example Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docbuild.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Legal.html">Legal Information</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/IntelAI/transfer-learning-tool">GitHub Repository</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Intel® Transfer Learning Tool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Intel® Transfer Learning Tool</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="intel-transfer-learning-tool">
+<h1>Intel® Transfer Learning Tool<a class="headerlink" href="#intel-transfer-learning-tool" title="Permalink to this heading">¶</a></h1>
+<p>Transfer learning workflows use the knowledge learned by a pre-trained model on a large dataset to improve the
+performance of a related problem with a smaller dataset. Intel® Transfer Learning Tool makes transfer learning
+workflows easier and faster across a variety of AI use cases. This open-source Python* library leverages public
+pretrained model hubs, Intel-optimized deep learning frameworks, and your custom dataset to efficiently generate new
+models optimized for Intel hardware.</p>
+<p>Features:</p>
+<ul class="simple">
+<li><p>Supports PyTorch* and TensorFlow*</p></li>
+<li><p>Use your own custom dataset or start with a dataset from over 100 image
+classification and text classification models from Torchvision, TensorFlow
+Hub, and Hugging Face</p></li>
+<li><p>Automatically create a trainable classification layer customized for your dataset</p></li>
+<li><p>Pre-process your dataset using scaling, cropping, batching, and splitting</p></li>
+<li><p>Use APIs for prediction, evaluation, and benchmarking</p></li>
+<li><p>Export your model for deployment or resume training from checkpoints</p></li>
+</ul>
+<p>Intel Optimizations:</p>
+<ul class="simple">
+<li><p>Boost performance with Intel® Optimization for TensorFlow and Intel® Extension for PyTorch</p></li>
+<li><p>Quantize to INT8 to reduce model size and speed up inference using Intel® Neural Compressor</p></li>
+<li><p>Optimize model for FP32 inference using Intel Neural Compressor</p></li>
+<li><p>Reduce training time with auto-mixed precision for select hardware platforms</p></li>
+<li><p>Further reduce training time with multinode training for PyTorch</p></li>
+</ul>
+<p>This document provides information, links, and instructions for the Intel
+Transfer Learning Tool as well as Jupyter* notebooks and examples that
+demonstrate its usage.</p>
+<section id="how-the-intel-transfer-learning-tool-works">
+<h2>How the Intel Transfer Learning Tool Works<a class="headerlink" href="#how-the-intel-transfer-learning-tool-works" title="Permalink to this heading">¶</a></h2>
+<p>The Intel Transfer Learning Tool lets you train AI models with TensorFlow or
+PyTorch using either no-code command line interface (CLI) commands at a bash
+prompt, or low-code application programming interface (API) calls from a Python
+script.</p>
+<p>Use your own dataset or select an existing image or text classification dataset listed in the
+<a class="reference internal" href="DATASETS.html"><span class="doc std std-doc">public datasets</span></a> documentation. Construct your own CLI or API commands for training, evaluation,
+and optimization using the TensorFlow or PyTorch framework, and finally export
+your saved model optimized for inference on Intel CPUs..</p>
+<p>An overview of the Intel Transfer Learning Tool flow is shown in this
+figure:</p>
+<p><img alt="alt text" src="_images/TLT-tool_flow.png" /></p>
+<p>The <a class="reference internal" href="GetStarted.html"><span class="doc std std-doc">Get Started guide</span></a> will walk you through the steps to check
+system requirements, install, and then run the tool with a couple of examples
+showing no-code CLI and low-code API approaches.</p>
+<p>See <a class="reference internal" href="Legal.html"><span class="doc std std-doc">Legal Information</span></a> for Disclaimers and Licensing information.</p>
+<p>*Other names and brands may be claimed as the property of others. <a class="reference external" href="http://www.intel.com/content/www/us/en/legal/trademarks.html">Trademarks</a></p>
+</section>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="GetStarted.html" class="btn btn-neutral float-right" title="Get Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Intel Corporation.
+      <span class="lastupdated">Last updated on May 23, 2023.
+      </span></p>
+  </div>
+
+  
+*Other names and brands may be claimed as the property of others.
+<a href="http://www.intel.com/content/www/us/en/legal/trademarks.html">Trademarks</a>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
