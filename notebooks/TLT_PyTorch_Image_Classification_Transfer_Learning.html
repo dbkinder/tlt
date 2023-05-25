@@ -24,9 +24,7 @@
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Transfer Learning for Image Classification using TensorFlow and the Intel® Transfer Learning Tool API" href="TLT_TF_Image_Classification_Transfer_Learning.html" />
-    <link rel="prev" title="Example Notebooks" href="../notebooks.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,43 +46,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Documentation Home</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../GetStarted.html">Get Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../notebooks.html">Example Notebooks</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Transfer Learning for Image Classification using PyTorch and the Intel® Transfer Learning Tool API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#1.-Import-dependencies-and-setup-parameters">1. Import dependencies and setup parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#2.-Get-the-model">2. Get the model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#3.-Get-the-dataset">3. Get the dataset</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Option-A:-Use-your-own-dataset">Option A: Use your own dataset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Option-B:-Use-a-dataset-from-the-PyTorch's-Torchvision-Datasets-catalog">Option B: Use a dataset from the PyTorch’s Torchvision Datasets catalog</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#4.-Prepare-the-dataset">4. Prepare the dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#5.-Predict-using-the-original-model">5. Predict using the original model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#6.-Transfer-Learning">6. Transfer Learning</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Arguments">Arguments</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#7.-Predict">7. Predict</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Custom-Single-Image-Prediction">Custom Single Image Prediction</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#8.-Export">8. Export</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#Dataset-Citations">Dataset Citations</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="TLT_TF_Image_Classification_Transfer_Learning.html">Transfer Learning for Image Classification using TensorFlow and the Intel® Transfer Learning Tool API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TLT_TF_Text_Classification_Transfer_Learning.html">Text Classification fine tuning using TensorFlow and the Intel® Transfer Learning Tool API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="TLT_PyTorch_Text_Classification_Transfer_Learning.html">Text Classification fine tuning using Pytorch and the Intel® Transfer Learning Tool API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Medical_Imaging_Classification.html">Medical Imaging Classification (Colorectal histology) using TensorFlow and the Intel® Transfer Learning Tool API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Remote_Sensing_Image_Scene_Classification.html">Remote Sensing Image Scene Classification (Resisc) using TensorFlow and the Intel® Transfer Learning Tool API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks.html#environment-setup-and-running-the-notebooks">Environment Setup and Running the Notebooks</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks.html">Example Notebooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docbuild.html">Building Documentation</a></li>
@@ -106,7 +74,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../notebooks.html">Example Notebooks</a></li>
       <li class="breadcrumb-item active">Transfer Learning for Image Classification using PyTorch and the Intel® Transfer Learning Tool API</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/notebooks/TLT_PyTorch_Image_Classification_Transfer_Learning.nblink.txt" rel="nofollow"> View page source</a>
@@ -498,16 +465,13 @@ url = &quot;http://www.cs.toronto.edu/~kriz/cifar.html&quot; }
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../notebooks.html" class="btn btn-neutral float-left" title="Example Notebooks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="TLT_TF_Image_Classification_Transfer_Learning.html" class="btn btn-neutral float-right" title="Transfer Learning for Image Classification using TensorFlow and the Intel® Transfer Learning Tool API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 23, 2023.
+      <span class="lastupdated">Last updated on May 24, 2023.
       </span></p>
   </div>
 
