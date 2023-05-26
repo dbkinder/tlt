@@ -4,10 +4,11 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Intel® Transfer Learning Tool &mdash; Intel® Transfer Learning Tool 0.2.0 documentation</title>
+  <title>What is Intel® Transfer Learning Tool &mdash; Intel® Transfer Learning Tool 0.2.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/tlt-custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon-intel-32x32.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,9 +16,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -50,7 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Example Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docbuild.html">Building Documentation</a></li>
@@ -72,7 +71,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Intel® Transfer Learning Tool</li>
+      <li class="breadcrumb-item active">What is Intel® Transfer Learning Tool</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -82,14 +81,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="intel-transfer-learning-tool">
-<h1>Intel® Transfer Learning Tool<a class="headerlink" href="#intel-transfer-learning-tool" title="Permalink to this heading">¶</a></h1>
-<p>Transfer learning workflows use the knowledge learned by a pre-trained model on a large dataset to improve the
-performance of a related problem with a smaller dataset. Intel® Transfer Learning Tool makes transfer learning
-workflows easier and faster across a variety of AI use cases. This open-source Python* library leverages public
-pretrained model hubs, Intel-optimized deep learning frameworks, and your custom dataset to efficiently generate new
-models optimized for Intel hardware.</p>
-<p>Features:</p>
+  <section id="what-is-intel-transfer-learning-tool">
+<h1>What is Intel® Transfer Learning Tool<a class="headerlink" href="#what-is-intel-transfer-learning-tool" title="Permalink to this headline">¶</a></h1>
+<p>Transfer learning workflows use the knowledge learned by a pre-trained model on
+a large dataset to improve the performance of a related problem with a smaller
+dataset. Intel® Transfer Learning Tool makes it easier and faster for you to
+create transfer learning workflows across a variety of AI use cases. Its
+open-source Python* library leverages public pretrained model hubs,
+Intel-optimized deep learning frameworks, and your custom dataset to efficiently
+generate new models optimized for Intel hardware.</p>
+<p>This document provides information, resource links, and instructions for the Intel
+Transfer Learning Tool as well as Jupyter* notebooks and examples that
+demonstrate its usage.</p>
+<p><strong>Features:</strong></p>
 <ul class="simple">
 <li><p>Supports PyTorch* and TensorFlow*</p></li>
 <li><p>Use your own custom dataset or start with a dataset from over 100 image
@@ -100,7 +104,7 @@ Hub, and Hugging Face</p></li>
 <li><p>Use APIs for prediction, evaluation, and benchmarking</p></li>
 <li><p>Export your model for deployment or resume training from checkpoints</p></li>
 </ul>
-<p>Intel Optimizations:</p>
+<p><strong>Intel Optimizations:</strong></p>
 <ul class="simple">
 <li><p>Boost performance with Intel® Optimization for TensorFlow and Intel® Extension for PyTorch</p></li>
 <li><p>Quantize to INT8 to reduce model size and speed up inference using Intel® Neural Compressor</p></li>
@@ -108,11 +112,8 @@ Hub, and Hugging Face</p></li>
 <li><p>Reduce training time with auto-mixed precision for select hardware platforms</p></li>
 <li><p>Further reduce training time with multinode training for PyTorch</p></li>
 </ul>
-<p>This document provides information, links, and instructions for the Intel
-Transfer Learning Tool as well as Jupyter* notebooks and examples that
-demonstrate its usage.</p>
 <section id="how-the-intel-transfer-learning-tool-works">
-<h2>How the Intel Transfer Learning Tool Works<a class="headerlink" href="#how-the-intel-transfer-learning-tool-works" title="Permalink to this heading">¶</a></h2>
+<h2>How the Intel Transfer Learning Tool Works<a class="headerlink" href="#how-the-intel-transfer-learning-tool-works" title="Permalink to this headline">¶</a></h2>
 <p>The Intel Transfer Learning Tool lets you train AI models with TensorFlow or
 PyTorch using either no-code command line interface (CLI) commands at a bash
 prompt, or low-code application programming interface (API) calls from a Python
@@ -144,7 +145,7 @@ showing no-code CLI and low-code API approaches.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 24, 2023.
+      <span class="lastupdated">Last updated on May 26, 2023.
       </span></p>
   </div>
 

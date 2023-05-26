@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/tlt-custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon-intel-32x32.png"/>
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,13 +16,13 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CLI Reference" href="../cli.html" />
+    <link rel="prev" title="Intel® Transfer Learning Tool API Examples" href="../notebooks.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,13 +44,24 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Documentation Home</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../GetStarted.html">Get Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks.html">Example Notebooks</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../examples/cli/README.html">Intel® Transfer Learning Tool CLI Examples</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../notebooks.html">Intel® Transfer Learning Tool API Examples</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Environment Setup and Running the Notebooks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#install-intel-transfer-learning-tool">Install Intel® Transfer Learning Tool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notebook-environment">Notebook Environment</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docbuild.html">Building Documentation</a></li>
@@ -71,6 +83,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
+          <li class="breadcrumb-item"><a href="../notebooks.html">Intel® Transfer Learning Tool API Examples</a></li>
       <li class="breadcrumb-item active">Environment Setup and Running the Notebooks</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/notebooks/setup.rst.txt" rel="nofollow"> View page source</a>
@@ -82,7 +96,7 @@
            <div itemprop="articleBody">
              
   <section id="environment-setup-and-running-the-notebooks">
-<h1>Environment Setup and Running the Notebooks<a class="headerlink" href="#environment-setup-and-running-the-notebooks" title="Permalink to this heading">¶</a></h1>
+<h1>Environment Setup and Running the Notebooks<a class="headerlink" href="#environment-setup-and-running-the-notebooks" title="Permalink to this headline">¶</a></h1>
 <p>Use the instructions below to install the dependencies required to run the notebooks.</p>
 <p>System Requirements:</p>
 <ol class="arabic simple">
@@ -91,13 +105,13 @@
 <li><p>git</p></li>
 </ol>
 <section id="install-intel-transfer-learning-tool">
-<h2>Install Intel® Transfer Learning Tool<a class="headerlink" href="#install-intel-transfer-learning-tool" title="Permalink to this heading">¶</a></h2>
+<h2>Install Intel® Transfer Learning Tool<a class="headerlink" href="#install-intel-transfer-learning-tool" title="Permalink to this headline">¶</a></h2>
 <p>This is required for the TLT tutorial notebooks and E2E notebooks. Follow the instructions in the
 <a class="reference internal" href="../GetStarted.html"><span class="doc std std-doc">Get Started</span></a> Guide. You can skip this step if you are only running
 the native framework notebooks.</p>
 </section>
 <section id="notebook-environment">
-<h2>Notebook Environment<a class="headerlink" href="#notebook-environment" title="Permalink to this heading">¶</a></h2>
+<h2>Notebook Environment<a class="headerlink" href="#notebook-environment" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Get a clone of this Transfer Learning repository from GitHub:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/IntelAI/transfer-learning.git transfer_learning
@@ -148,19 +162,24 @@ PYTHONPATH=${TLT_REPO} jupyter notebook --port 8888
 </li>
 <li><p>Copy and paste the URL from the terminal to your browser to view and run the notebooks.</p></li>
 </ol>
+<p>Once you have the environment and dependencies set up, see the list of available
+notebook examples.</p>
 </section>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../notebooks.html" class="btn btn-neutral float-left" title="Intel® Transfer Learning Tool API Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../cli.html" class="btn btn-neutral float-right" title="CLI Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 24, 2023.
+      <span class="lastupdated">Last updated on May 26, 2023.
       </span></p>
   </div>
 

@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/tlt-custom.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon-intel-32x32.png"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -15,15 +16,13 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Intel® Transfer Learning Tool Supported Models" href="Models.html" />
-    <link rel="prev" title="Intel® Transfer Learning Tool" href="index.html" /> 
+    <link rel="prev" title="What is Intel® Transfer Learning Tool" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -62,7 +61,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="notebooks.html">Example Notebooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docbuild.html">Building Documentation</a></li>
@@ -95,14 +94,14 @@
            <div itemprop="articleBody">
              
   <section id="get-started">
-<h1>Get Started<a class="headerlink" href="#get-started" title="Permalink to this heading">¶</a></h1>
+<h1>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h1>
 <p>This is a guide for getting started with Intel® Transfer Learning Tool and will
 walk you through the steps to check system requirements, install, and then run
 the tool with a couple of examples showing no-code CLI and low-code API
 approaches.</p>
 <p><img alt="alt text" src="_images/TLT-GSG_flow.png" /></p>
 <section id="check-system-requirements">
-<h2>① Check System Requirements<a class="headerlink" href="#check-system-requirements" title="Permalink to this heading">¶</a></h2>
+<h2>① Check System Requirements<a class="headerlink" href="#check-system-requirements" title="Permalink to this headline">¶</a></h2>
 <table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Recommended Hardware</p></th>
@@ -138,7 +137,7 @@ approaches.</p>
 </table>
 </section>
 <section id="install">
-<h2>② Install<a class="headerlink" href="#install" title="Permalink to this heading">¶</a></h2>
+<h2>② Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p><strong>Install Dependencies</strong></p>
 <p>Install required packages using:</p>
@@ -206,21 +205,25 @@ command, which displays help information about the Intel Transfer Learning Tool:
 or custom datasets that you have on your machine.  The following CLI and API
 examples use the Intel Transfer Learning Tool’s custom dataset option
 (<code class="docutils literal notranslate"><span class="pre">--dataset-dir</span></code>) with the TensorFlow flowers dataset.</p>
-<p>Download the flowers dataset from
-<a class="reference external" href="https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz">https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz</a>
-and extract the files to a folder on your machine.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span>
-<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">storage</span><span class="o">.</span><span class="n">googleapis</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">download</span><span class="o">.</span><span class="n">tensorflow</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">example_images</span><span class="o">/</span><span class="n">flower_photos</span><span class="o">.</span><span class="n">tgz</span>
-<span class="n">tar</span> <span class="o">-</span><span class="n">xvzf</span> <span class="n">flow_photos</span><span class="o">.</span><span class="n">tgz</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a directory for the dataset to be downloaded
+DATASET_DIR=/tmp/dataset
+mkdir -p ${DATASET_DIR}
+
+# Download and extract the dataset
+wget -P ${DATASET_DIR} https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz
+tar -xzf ${DATASET_DIR}/flower_photos.tgz -C ${DATASET_DIR}
+
+# Set the DATASET_DIR to the extracted images folder
+DATASET_DIR=${DATASET_DIR}/flower_photos
 </pre></div>
 </div>
-<p>After extracting the dataset, you should have a <code class="docutils literal notranslate"><span class="pre">flower_photos</span></code> folder with
+<p>At this point, you should have a <code class="docutils literal notranslate"><span class="pre">flower_photos</span></code> folder with
 subfolders for <code class="docutils literal notranslate"><span class="pre">daisy</span></code>, <code class="docutils literal notranslate"><span class="pre">dandelion</span></code>, <code class="docutils literal notranslate"><span class="pre">roses</span></code>, <code class="docutils literal notranslate"><span class="pre">sunflower</span></code>, and <code class="docutils literal notranslate"><span class="pre">tulips</span></code>.</p>
 </li>
 </ol>
 </section>
 <section id="run-the-intel-transfer-learning-tool">
-<h2>③ Run the Intel Transfer Learning Tool<a class="headerlink" href="#run-the-intel-transfer-learning-tool" title="Permalink to this heading">¶</a></h2>
+<h2>③ Run the Intel Transfer Learning Tool<a class="headerlink" href="#run-the-intel-transfer-learning-tool" title="Permalink to this headline">¶</a></h2>
 <p>With the Intel Transfer Learning Tool, you can train AI models with TensorFlow or
 PyTorch using either no-code CLI commands at a bash prompt, or low-code API
 calls from a Python script. Both approaches provide the same opportunities for
@@ -228,71 +231,61 @@ training, evaluation, optimization, and benchmarking. With the CLI, no
 programming experience is required, and you’ll need basic Python knowledge to
 use the API. Choose the approach that works best for you.</p>
 <section id="run-using-the-no-code-cli">
-<h3>Run Using the No-Code CLI<a class="headerlink" href="#run-using-the-no-code-cli" title="Permalink to this heading">¶</a></h3>
-<p>Follow an example below, or construct your own command. Use <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">--help</span></code> to see
-a summary of available CLI commands.  See more detailed information on any
-command by using <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">&lt;command&gt;</span> <span class="pre">--help</span></code> (for example, <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">train</span> <span class="pre">--help</span></code>).</p>
-<p><strong>List Available Options</strong></p>
-<p>Show all available framework, use cases, or models with the <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">list</span></code> command,
-for example:</p>
+<h3>Run Using the No-Code CLI<a class="headerlink" href="#run-using-the-no-code-cli" title="Permalink to this headline">¶</a></h3>
+<p>Let’s continue from the previous step where you prepared the dataset, and train
+a model using CLI commands.  This example uses the CLI to train an image
+classifier to identify different types of flowers. You can see a list of all
+available image classifier models using the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tlt</span> <span class="nb">list</span> <span class="n">models</span> <span class="o">--</span><span class="n">use</span><span class="o">-</span><span class="n">case</span> <span class="n">image_classification</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">------------------------------</span>
-<span class="n">IMAGE</span> <span class="n">CLASSIFICATION</span>
-<span class="o">------------------------------</span>
-<span class="n">alexnet</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">convnext_base</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">convnext_large</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">convnext_small</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">convnext_tiny</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">densenet121</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">densenet161</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">densenet169</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">densenet201</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">efficientnet_b0</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">efficientnet_b0</span> <span class="p">(</span><span class="n">tensorflow</span><span class="p">)</span>
-<span class="n">efficientnet_b1</span> <span class="p">(</span><span class="n">pytorch</span><span class="p">)</span>
-<span class="n">efficientnet_b1</span> <span class="p">(</span><span class="n">tensorflow</span><span class="p">)</span>
-<span class="o">...</span>
-</pre></div>
-</div>
-<p>See the <a class="reference internal" href="Models.html"><span class="doc std std-doc">full list of supported models</span></a>.</p>
 <p><strong>Train a Model</strong></p>
-<p>This example uses the CLI to train an image classifier to identify different types of flowers.
-Make sure to specify your own file paths for <code class="docutils literal notranslate"><span class="pre">dataset-dir</span></code> and <code class="docutils literal notranslate"><span class="pre">output-dir</span></code>. The <code class="docutils literal notranslate"><span class="pre">dataset-dir</span></code> should
-point to the flowers dataset you prepared in an earlier step. For more information on using different
-datasets, see the <a class="reference internal" href="examples/cli/README.html"><span class="doc std std-doc">CLI examples</span></a>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tlt</span> <span class="n">train</span> <span class="o">-</span><span class="n">f</span> <span class="n">tensorflow</span> <span class="o">--</span><span class="n">model</span><span class="o">-</span><span class="n">name</span> <span class="n">resnet_v1_50</span> <span class="o">--</span><span class="n">dataset</span><span class="o">-</span><span class="nb">dir</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">dataset</span><span class="o">/</span><span class="n">flower_photos</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="nb">dir</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">output</span>
+<p>In this example, we’ll use the <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">train</span></code> command to use the TensorFlow
+ResNet50v1.5 model using the flowers dataset we already prepared and write the
+trained model to a folder specified with <code class="docutils literal notranslate"><span class="pre">--output-dir</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tlt train -f tensorflow --model-name resnet_v1_50 --dataset-dir ${DATASET_DIR} --output-dir /tmp/output
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span> <span class="n">name</span><span class="p">:</span> <span class="n">resnet_v1_50</span>
 <span class="n">Framework</span><span class="p">:</span> <span class="n">tensorflow</span>
-<span class="n">Dataset</span> <span class="n">name</span><span class="p">:</span> <span class="n">tf_flowers</span>
 <span class="n">Training</span> <span class="n">epochs</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Dataset</span> <span class="nb">dir</span><span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">dataset</span><span class="o">/</span><span class="n">flower_photos</span>
 <span class="n">Output</span> <span class="n">directory</span><span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">output</span>
 <span class="n">Found</span> <span class="mi">3670</span> <span class="n">files</span> <span class="n">belonging</span> <span class="n">to</span> <span class="mi">5</span> <span class="n">classes</span><span class="o">.</span>
 <span class="o">...</span>
+<span class="n">Model</span><span class="p">:</span> <span class="s2">&quot;sequential&quot;</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">Layer</span> <span class="p">(</span><span class="nb">type</span><span class="p">)</span>                <span class="n">Output</span> <span class="n">Shape</span>              <span class="n">Param</span> <span class="c1">#</span>
+<span class="o">=================================================================</span>
+<span class="n">keras_layer</span> <span class="p">(</span><span class="n">KerasLayer</span><span class="p">)</span>    <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2048</span><span class="p">)</span>              <span class="mi">23561152</span>
+<span class="n">dense</span> <span class="p">(</span><span class="n">Dense</span><span class="p">)</span>               <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>                 <span class="mi">10245</span>
+<span class="o">=================================================================</span>
+<span class="n">Total</span> <span class="n">params</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span><span class="mi">571</span><span class="p">,</span><span class="mi">397</span>
+<span class="n">Trainable</span> <span class="n">params</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span><span class="mi">245</span>
+<span class="n">Non</span><span class="o">-</span><span class="n">trainable</span> <span class="n">params</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span><span class="mi">561</span><span class="p">,</span><span class="mi">152</span>
+<span class="n">_________________________________________________________________</span>
+<span class="n">Checkpoint</span> <span class="n">directory</span><span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">resnet_v1_50_checkpoints</span>
+<span class="mi">86</span><span class="o">/</span><span class="mi">86</span> <span class="p">[</span><span class="o">==============================</span><span class="p">]</span> <span class="o">-</span> <span class="mi">24</span><span class="n">s</span> <span class="mi">248</span><span class="n">ms</span><span class="o">/</span><span class="n">step</span> <span class="o">-</span> <span class="n">loss</span><span class="p">:</span> <span class="mf">0.4600</span> <span class="o">-</span> <span class="n">acc</span><span class="p">:</span> <span class="mf">0.8438</span>
 <span class="n">Saved</span> <span class="n">model</span> <span class="n">directory</span><span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">resnet_v1_50</span><span class="o">/</span><span class="mi">1</span>
 </pre></div>
 </div>
-<p>After training completes, the model is exported to the output directory
-specified in your command. The actual directory name is printed out to the
-console. A numbered folder is created for each training run.</p>
+<p>After training completes, the <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">train</span></code> command evaluates the model. The loss and
+accuracy values are printed toward the end of the console output. The model is
+exported to the output directory you specified in a numbered folder created for
+each training run.</p>
 <p><strong>Next Steps</strong></p>
-<p>The training command also evalutes the trained model and prints out accuracy and
-loss metrics.  Evaluation can also be called separately using <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">eval</span></code>. The
-trained model can also be benchmarked using <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">benchmark</span></code> or quantized using
-<code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">quantize</span></code>.  See the <a class="reference internal" href="examples/cli/README.html"><span class="doc std std-doc">CLI documentation</span></a> for more
-examples using the CLI or the <a class="reference internal" href="cli.html"><span class="doc std std-doc">CLI reference</span></a>.</p>
+<p>That ends this Get Started CLI example. As a next step, you can also follow a
+more complete example that includes evaluation, benchmarking, and quantization
+in the datasets, as well as some use of some additional models in the <a class="reference internal" href="examples/cli/README.html"><span class="doc std std-doc">CLI
+examples</span></a> documentation. You can also read about all the
+CLI commands in the <a class="reference internal" href="cli.html"><span class="doc std std-doc">CLI reference</span></a>.</p>
 </section>
 <section id="run-using-the-low-code-api">
-<h3>Run Using the Low-Code API<a class="headerlink" href="#run-using-the-low-code-api" title="Permalink to this heading">¶</a></h3>
-<p>The following example trains an image classification model with the TensorFlow
-flowers dataset using the API calls from Python.  Additionally, the model is
+<h3>Run Using the Low-Code API<a class="headerlink" href="#run-using-the-low-code-api" title="Permalink to this headline">¶</a></h3>
+<p>The following Python code example trains an image classification model with the TensorFlow
+flowers dataset using API calls from Python.  The model is
 benchmarked and quantized to INT8 precision for improved inference performance.
-You can run the API using a Jupyter notebook. See the <a class="reference internal" href="notebooks/setup.html"><span class="doc std std-doc">notebook setup
+You can run the API example using a Jupyter notebook. See the <a class="reference internal" href="notebooks/setup.html"><span class="doc std std-doc">notebook setup
 instructions</span></a>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tlt.datasets</span> <span class="kn">import</span> <span class="n">dataset_factory</span>
 <span class="kn">from</span> <span class="nn">tlt.models</span> <span class="kn">import</span> <span class="n">model_factory</span>
@@ -351,7 +344,7 @@ instructions</span></a>.</p>
 </section>
 </section>
 <section id="summary-and-next-steps">
-<h2>Summary and Next Steps<a class="headerlink" href="#summary-and-next-steps" title="Permalink to this heading">¶</a></h2>
+<h2>Summary and Next Steps<a class="headerlink" href="#summary-and-next-steps" title="Permalink to this headline">¶</a></h2>
 <p>The Intel Transfer Learning Tool can be used to develop an AI model and export
 an Intel-optimized saved model for deployment. The sample CLI and API commands
 we’ve presented show how to execute end-to-end transfer learning workflows. For
@@ -397,7 +390,7 @@ reference workflow examples:</p>
 </ul>
 </section>
 <section id="support">
-<h2>Support<a class="headerlink" href="#support" title="Permalink to this heading">¶</a></h2>
+<h2>Support<a class="headerlink" href="#support" title="Permalink to this headline">¶</a></h2>
 <p>The Intel Transfer Learning Tool team tracks bugs and enhancement requests using
 <a class="reference external" href="https://github.com/IntelAI/transfer-learning-tool/issues">GitHub issues</a>. Before submitting a
 suggestion or bug report, search the existing GitHub issues to see if your issue has already been reported.</p>
@@ -409,7 +402,7 @@ suggestion or bug report, search the existing GitHub issues to see if your issue
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Intel® Transfer Learning Tool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="What is Intel® Transfer Learning Tool" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="Models.html" class="btn btn-neutral float-right" title="Intel® Transfer Learning Tool Supported Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -417,7 +410,7 @@ suggestion or bug report, search the existing GitHub issues to see if your issue
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 24, 2023.
+      <span class="lastupdated">Last updated on May 26, 2023.
       </span></p>
   </div>
 

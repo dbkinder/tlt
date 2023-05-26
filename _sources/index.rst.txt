@@ -11,7 +11,7 @@
    Supported Models <Models>
    DATASETS
    distributed
-   notebooks
+   examples
    cli
    api
    docbuild
