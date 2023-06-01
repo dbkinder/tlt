@@ -15,6 +15,7 @@
    
       ~PyTorchDataset.__init__
       ~PyTorchDataset.get_batch
+      ~PyTorchDataset.get_inc_dataloaders
       ~PyTorchDataset.preprocess
       ~PyTorchDataset.shuffle_split
    

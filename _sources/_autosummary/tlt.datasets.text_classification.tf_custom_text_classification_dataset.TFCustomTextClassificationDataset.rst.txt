@@ -15,6 +15,7 @@
    
       ~TFCustomTextClassificationDataset.__init__
       ~TFCustomTextClassificationDataset.get_batch
+      ~TFCustomTextClassificationDataset.get_inc_dataloaders
       ~TFCustomTextClassificationDataset.get_str_label
       ~TFCustomTextClassificationDataset.preprocess
       ~TFCustomTextClassificationDataset.shuffle_split

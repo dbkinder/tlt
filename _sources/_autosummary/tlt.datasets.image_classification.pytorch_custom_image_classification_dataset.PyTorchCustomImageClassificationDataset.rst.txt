@@ -15,6 +15,7 @@
    
       ~PyTorchCustomImageClassificationDataset.__init__
       ~PyTorchCustomImageClassificationDataset.get_batch
+      ~PyTorchCustomImageClassificationDataset.get_inc_dataloaders
       ~PyTorchCustomImageClassificationDataset.preprocess
       ~PyTorchCustomImageClassificationDataset.shuffle_split
    

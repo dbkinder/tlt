@@ -50,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#datasets">Datasets</a><ul class="current">
@@ -121,10 +121,13 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_batch</span></code>([subset])</p></td>
 <td><p>Get a single batch of images and labels from the dataset.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess</span></code>(image_size, batch_size[, ...])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inc_dataloaders</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess</span></code>(image_size, batch_size[, ...])</p></td>
 <td><p>Preprocess the dataset to convert to float32, resize, and batch the images</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shuffle_split</span></code>([train_pct, val_pct, ...])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shuffle_split</span></code>([train_pct, val_pct, ...])</p></td>
 <td><p>Randomly split the dataset into train, validation, and test subsets with a pseudo-random seed option.</p></td>
 </tr>
 </tbody>
@@ -181,7 +184,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

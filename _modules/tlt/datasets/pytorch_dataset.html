@@ -47,7 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docbuild.html">Building Documentation</a></li>
@@ -181,7 +181,7 @@
 <span class="sd">                (examples, labels)</span>
 
 <span class="sd">            Raises:</span>
-<span class="sd">                ValueError if the dataset is not defined yet or the given subset is not valid</span>
+<span class="sd">                ValueError: if the dataset is not defined yet or the given subset is not valid</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">subset</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_loader</span><span class="p">))</span>
@@ -206,7 +206,7 @@
 <span class="sd">                seed (None or int): default None, can be set for pseudo-randomization</span>
 
 <span class="sd">            Raises:</span>
-<span class="sd">                ValueError if percentage input args are not floats or sum to greater than 1</span>
+<span class="sd">                ValueError: if percentage input args are not floats or sum to greater than 1</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">train_pct</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val_pct</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">test_pct</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Percentage arguments must be floats.&quot;</span><span class="p">)</span>
@@ -314,7 +314,18 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_dataset</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="n">get_transform</span><span class="p">(</span><span class="n">image_size</span><span class="p">,</span> <span class="n">add_aug</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_preprocessed</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;image_size&#39;</span><span class="p">:</span> <span class="n">image_size</span><span class="p">,</span> <span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="n">batch_size</span><span class="p">}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_make_data_loaders</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_make_data_loaders</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_inc_dataloaders</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">calib_dataloader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_loader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">eval_dataloader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validation_loader</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_loader</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">eval_dataloader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">test_loader</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">eval_dataloader</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">train_loader</span>
+
+        <span class="k">return</span> <span class="n">calib_dataloader</span><span class="p">,</span> <span class="n">eval_dataloader</span></div>
 </pre></div>
 
            </div>
@@ -325,7 +336,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

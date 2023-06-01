@@ -51,7 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docbuild.html">Building Documentation</a></li>
@@ -212,6 +212,9 @@ Corporation does not own the rights to this data set and does not confer any rig
 <h3>Option B: Use the TFDS catalog<a class="headerlink" href="#Option-B:-Use-the-TFDS-catalog" title="Permalink to this headline">¶</a></h3>
 <p>Option B allows for using a dataset from the <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/overview">TensorFlow datasets catalog</a>. The dataset factory currently supports the following TFDS text classification datasets: <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/imdb_reviews">imdb_reviews</a>, <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/imdb_reviews">glue/sst2</a>, <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/glue#gluecola_default_config">glue/cola</a>, and
 <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/ag_news_subset">ag_news_subset</a>.</p>
+<blockquote>
+<div><p>Note that quantization is not supported when using datasets from the TensorFlow Datasets catalog. If you would like to do <a class="reference external" href="#8.-Quantization">quantization in step 8</a>, use <a class="reference external" href="#Option-A:-Use-your-own-dataset">Option A to load a dataset from disk</a> instead of Option B.</p>
+</div></blockquote>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -460,7 +463,7 @@ enable_auto_mixed_precision is set to None, auto mixed precision will be automat
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

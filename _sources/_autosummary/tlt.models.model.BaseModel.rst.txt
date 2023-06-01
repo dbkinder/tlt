@@ -22,7 +22,6 @@
       ~BaseModel.predict
       ~BaseModel.quantize
       ~BaseModel.train
-      ~BaseModel.write_inc_config_file
    
    
 

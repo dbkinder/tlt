@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Text Classification Intel Transfer Learning Tool CLI Examples &mdash; Intel® Transfer Learning Tool 0.2.0 documentation</title>
+  <title>Text Classification Intel® Transfer Learning Tool CLI Example &mdash; Intel® Transfer Learning Tool 0.2.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/tlt-custom.css" type="text/css" />
@@ -21,8 +21,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="API Reference" href="../../api.html" />
-    <link rel="prev" title="Image Classification Intel® Transfer Learning Tool CLI Examples" href="image_classification.html" /> 
+    <link rel="next" title="Intel® Transfer Learning Tool API Examples" href="../../notebooks/README.html" />
+    <link rel="prev" title="Image Classification Intel® Transfer Learning Tool CLI Example" href="image_classification.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,20 +50,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../cli.html">CLI Reference</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../../cli.html#tlt">tlt</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.html">Intel® Transfer Learning Tool CLI Examples</a></li>
-<li class="toctree-l2"><a class="reference internal" href="image_classification.html">Image Classification Intel® Transfer Learning Tool CLI Examples</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Text Classification Intel Transfer Learning Tool CLI Examples</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="README.html">Beyond Get Started CLI Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_classification.html">Image Classification Intel® Transfer Learning Tool CLI Example</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Text Classification Intel® Transfer Learning Tool CLI Example</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#fine-tuning-using-your-own-dataset">Fine tuning using your own dataset</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#fine-tuning-using-a-dataset-from-the-tfds-catalog">Fine tuning using a dataset from the TFDS catalog</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#distributed-transfer-learning-using-a-dataset-from-hugging-face">Distributed transfer learning using a dataset from Hugging Face</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#citations">Citations</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../notebooks/README.html">Intel® Transfer Learning Tool API Examples</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docbuild.html">Building Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../Legal.html">Legal Information</a></li>
@@ -84,8 +84,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../../cli.html">CLI Reference</a></li>
-      <li class="breadcrumb-item active">Text Classification Intel Transfer Learning Tool CLI Examples</li>
+          <li class="breadcrumb-item"><a href="../examples.html">Examples</a></li>
+      <li class="breadcrumb-item active">Text Classification Intel® Transfer Learning Tool CLI Example</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/examples/cli/text_classification.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -95,8 +95,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="text-classification-intel-transfer-learning-tool-cli-examples">
-<h1>Text Classification Intel Transfer Learning Tool CLI Examples<a class="headerlink" href="#text-classification-intel-transfer-learning-tool-cli-examples" title="Permalink to this headline">¶</a></h1>
+  <section id="text-classification-intel-transfer-learning-tool-cli-example">
+<h1>Text Classification Intel® Transfer Learning Tool CLI Example<a class="headerlink" href="#text-classification-intel-transfer-learning-tool-cli-example" title="Permalink to this headline">¶</a></h1>
 <section id="fine-tuning-using-your-own-dataset">
 <h2>Fine tuning using your own dataset<a class="headerlink" href="#fine-tuning-using-your-own-dataset" title="Permalink to this headline">¶</a></h2>
 <p>The example below shows how to fine tune a TensorFlow text classification model using your own
@@ -284,15 +284,15 @@ tlt<span class="w"> </span>train<span class="w"> </span><span class="se">\</span
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="image_classification.html" class="btn btn-neutral float-left" title="Image Classification Intel® Transfer Learning Tool CLI Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../api.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="image_classification.html" class="btn btn-neutral float-left" title="Image Classification Intel® Transfer Learning Tool CLI Example" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../notebooks/README.html" class="btn btn-neutral float-right" title="Intel® Transfer Learning Tool API Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

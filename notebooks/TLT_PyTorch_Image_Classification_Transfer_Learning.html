@@ -51,7 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docbuild.html">Building Documentation</a></li>
@@ -428,7 +428,55 @@ validation subset.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">saved_model_dir</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="9.-Post-training-quantization">
+<h2>9. Post-training quantization<a class="headerlink" href="#9.-Post-training-quantization" title="Permalink to this headline">¶</a></h2>
+<p>In this section, the <code class="docutils literal notranslate"><span class="pre">tlt</span></code> API uses <a class="reference external" href="https://github.com/intel/neural-compressor">Intel® Neural Compressor (INC)</a> to benchmark and quantize the model to get optimal inference performance.</p>
+<p>We use the Intel Neural Compressor to benchmark the full precision model to see how it performs, as our baseline.</p>
+<blockquote>
+<div><p>Note that there is a known issue when running Intel Neural Compressor from a notebook that you may sometimes see the error <code class="docutils literal notranslate"><span class="pre">zmq.error.ZMQError:</span> <span class="pre">Address</span> <span class="pre">already</span> <span class="pre">in</span> <span class="pre">use</span></code>. If you see this error, rerun the cell again.</p>
+</div></blockquote>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">benchmark</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next we use Intel Neural Compressor to automatically search for the optimal quantization recipe for low-precision model inference within the accuracy loss constrains defined in the config. Running post training quantization may take several minutes, depending on your hardware and the exit policy (timeout and max trials).</p>
+<p>You can customize the config by passing these parameters: * <strong>accuracy_criterion_relative</strong> (float): Relative accuracy loss (default: 0.01, which is 1%) * <strong>exit_policy_timeout</strong> (int): Tuning timeout in seconds (default: 0). Tuning processing finishes when the timeout or max_trials is reached. A tuning timeout of 0 means that the tuning phase stops when the accuracy criterion is met. * <strong>exit_policy_max_trials</strong> (int): Maximum number of tuning trials (default: 50). Tuning processing finishes
+when the timeout or or max_trials is reached.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_inc_config</span><span class="p">(</span><span class="n">accuracy_criterion_relative</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                              <span class="n">exit_policy_timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                              <span class="n">exit_policy_max_trials</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inc_output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;quantized_models&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
+                                       <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">saved_model_dir</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">inc_output_dir</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s benchmark using the quantized model, so that we can compare the performance to the full precision model that was originally benchmarked.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">benchmark</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">saved_model_dir</span><span class="o">=</span><span class="n">inc_output_dir</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -470,7 +518,7 @@ url = &quot;http://www.cs.toronto.edu/~kriz/cifar.html&quot; }
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

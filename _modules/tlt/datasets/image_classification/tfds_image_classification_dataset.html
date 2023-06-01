@@ -47,7 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docbuild.html">Building Documentation</a></li>
@@ -179,7 +179,7 @@
 <span class="sd">                                             resizing</span>
 
 <span class="sd">            Raises:</span>
-<span class="sd">                ValueError if the dataset is not defined or has already been processed</span>
+<span class="sd">                ValueError: if the dataset is not defined or has already been processed</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_preprocessed</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Data has already been preprocessed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_preprocessed</span><span class="p">))</span>
@@ -240,7 +240,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

@@ -51,7 +51,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docbuild.html">Building Documentation</a></li>
@@ -205,6 +205,9 @@ Corporation does not own the rights to this data set and does not confer any rig
 <section id="Option-B:-Use-the-HuggingFace-catalog">
 <h3>Option B: Use the HuggingFace catalog<a class="headerlink" href="#Option-B:-Use-the-HuggingFace-catalog" title="Permalink to this headline">¶</a></h3>
 <p>Option B allows for using a dataset from the <a class="reference external" href="https://huggingface.co/datasets">HuggingFace datasets catalog</a>. Current supported datasets: - <strong>imdb</strong> - <strong>tweet_eval/</strong> – emoji, emotion, hate, irony, offensive, sentiment, stance_abortion, stance_atheism, stance_climate, stance_feminist, stance_hillary - <strong>rotten_tomatoes</strong> - <strong>ag_news</strong> - <strong>sst2</strong></p>
+<blockquote>
+<div><p>Note that quantization is not supported when using datasets from the HuggingFace Datasets catalog. If you would like to do <a class="reference external" href="#8.-Quantization">quantization in step 8</a>, use <a class="reference external" href="#Option-A:-Use-your-own-dataset">Option A to load a dataset from disk</a> instead of Option B.</p>
+</div></blockquote>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -443,7 +446,7 @@ Corporation does not own the rights to this data set and does not confer any rig
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

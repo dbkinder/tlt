@@ -1,0 +1,16 @@
+Examples
+########
+
+.. include:: ../../examples/README.md
+   :parser: myst_parser.sphinx_
+   :start-after: # Examples
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   cli/README
+   cli/image_classification.rst
+   cli/text_classification.rst
+   ../notebooks/README
+

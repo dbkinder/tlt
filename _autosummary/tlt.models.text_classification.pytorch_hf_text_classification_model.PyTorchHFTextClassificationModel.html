@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel" href="tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel.html" />
-    <link rel="prev" title="tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel" href="tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel.html" /> 
+    <link rel="next" title="tlt.models.text_classification.text_classification_model.TextClassificationModel" href="tlt.models.text_classification.text_classification_model.TextClassificationModel.html" />
+    <link rel="prev" title="tlt.datasets.dataset.BaseDataset" href="tlt.datasets.dataset.BaseDataset.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api.html#datasets">Datasets</a></li>
@@ -120,7 +120,7 @@ fine tuning.</p>
 <td><p>Class constructor</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">benchmark</span></code>(saved_model_dir, inc_config_path)</p></td>
-<td><p>Use INC to benchmark the specified model for performance or accuracy.</p></td>
+<td><p>Use Intel Neural Compressor to benchmark the model with the dataset argument.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code>([dataset_or_dataloader])</p></td>
 <td><p>Evaulates the model on the given dataset (or) dataloader.</p></td>
@@ -149,16 +149,16 @@ fine tuning.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(input_samples[, return_raw])</p></td>
 <td><p>Generates predictions for the specified input samples.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code>(output_dir, inc_config_path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize" title="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, inc_config_path)</p></td>
 <td><p>Performs post training quantization using the Intel Neural Compressor on the model using the specified config file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code>(dataset, output_dir[, epochs, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.train.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.train" title="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(dataset, output_dir[, epochs, ...])</p></td>
 <td><p>Trains the model using the specified text classification dataset.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">unfreeze_layer</span></code>(layer_name)</p></td>
 <td><p>Unfreezes the model's layer using a layer name :param layer_name: The layer name that will be frozen in the model :type layer_name: string</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_inc_config_file</span></code>(config_file_path, ...)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.write_inc_config_file.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.write_inc_config_file" title="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.write_inc_config_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_inc_config_file</span></code></a>(config_file_path, ...)</p></td>
 <td><p>Writes an INC compatible config file to the specified path usings args from the specified dataset and parameters.</p></td>
 </tr>
 </tbody>
@@ -171,7 +171,7 @@ fine tuning.</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dropout_layer_rate</span></code></p></td>
-<td><p></p></td>
+<td><p>The probability of any one node being dropped when a dropout layer is used</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">framework</span></code></p></td>
 <td><p>Framework with which the model is compatible</p></td>
@@ -201,15 +201,15 @@ fine tuning.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel.html" class="btn btn-neutral float-left" title="tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel.html" class="btn btn-neutral float-right" title="tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tlt.datasets.dataset.BaseDataset.html" class="btn btn-neutral float-left" title="tlt.datasets.dataset.BaseDataset" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tlt.models.text_classification.text_classification_model.TextClassificationModel.html" class="btn btn-neutral float-right" title="tlt.models.text_classification.text_classification_model.TextClassificationModel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

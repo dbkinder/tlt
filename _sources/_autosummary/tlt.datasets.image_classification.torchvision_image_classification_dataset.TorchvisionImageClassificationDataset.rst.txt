@@ -15,6 +15,7 @@
    
       ~TorchvisionImageClassificationDataset.__init__
       ~TorchvisionImageClassificationDataset.get_batch
+      ~TorchvisionImageClassificationDataset.get_inc_dataloaders
       ~TorchvisionImageClassificationDataset.preprocess
       ~TorchvisionImageClassificationDataset.shuffle_split
    

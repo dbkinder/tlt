@@ -15,6 +15,7 @@
    
       ~TFDataset.__init__
       ~TFDataset.get_batch
+      ~TFDataset.get_inc_dataloaders
       ~TFDataset.shuffle_split
    
    

@@ -15,6 +15,7 @@
    
       ~TFDSImageClassificationDataset.__init__
       ~TFDSImageClassificationDataset.get_batch
+      ~TFDSImageClassificationDataset.get_inc_dataloaders
       ~TFDSImageClassificationDataset.preprocess
       ~TFDSImageClassificationDataset.shuffle_split
    

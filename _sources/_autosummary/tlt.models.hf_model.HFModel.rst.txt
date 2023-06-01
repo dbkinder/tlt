@@ -22,7 +22,6 @@
       ~HFModel.predict
       ~HFModel.quantize
       ~HFModel.train
-      ~HFModel.write_inc_config_file
    
    
 

@@ -15,6 +15,7 @@
    
       ~TFCustomImageClassificationDataset.__init__
       ~TFCustomImageClassificationDataset.get_batch
+      ~TFCustomImageClassificationDataset.get_inc_dataloaders
       ~TFCustomImageClassificationDataset.preprocess
       ~TFCustomImageClassificationDataset.shuffle_split
    

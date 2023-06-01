@@ -50,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#datasets">Datasets</a><ul class="current">
@@ -141,9 +141,9 @@ exclude_cols can be specified.</p></li>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>FileNotFoundError if the csv file is not found in the dataset directory</strong> – </p></li>
-<li><p><strong>TypeError if the class_names parameter is not a list</strong><strong> or </strong><strong>the label_map_func is not callable</strong> – </p></li>
-<li><p><strong>ValueError if the class_names list is empty</strong> – </p></li>
+<li><p><strong>FileNotFoundError</strong> – if the csv file is not found in the dataset directory</p></li>
+<li><p><strong>TypeError</strong> – if the class_names parameter is not a list or the label_map_func is not callable</p></li>
+<li><p><strong>ValueError</strong> – if the class_names list is empty</p></li>
 </ul>
 </dd>
 </dl>
@@ -166,13 +166,16 @@ exclude_cols can be specified.</p></li>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_batch</span></code>([subset])</p></td>
 <td><p>Get a single batch of images and labels from the dataset.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_str_label</span></code>(numerical_value)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inc_dataloaders</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_str_label</span></code>(numerical_value)</p></td>
 <td><p>Returns the string label (class name) associated with the specified numerical value.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess</span></code>(batch_size)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess</span></code>(batch_size)</p></td>
 <td><p>Batch the dataset</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shuffle_split</span></code>([train_pct, val_pct, ...])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shuffle_split</span></code>([train_pct, val_pct, ...])</p></td>
 <td><p>Randomly split the dataset into train, validation, and test subsets with a pseudo-random seed option.</p></td>
 </tr>
 </tbody>
@@ -229,7 +232,7 @@ exclude_cols can be specified.</p></li>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

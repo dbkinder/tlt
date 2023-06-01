@@ -47,7 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docbuild.html">Building Documentation</a></li>
@@ -146,17 +146,23 @@
     <span class="nd">@property</span>
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span> <span class="nf">num_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The number of output neurons in the model; equal to the number of classes in the dataset</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">dropout_layer_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The probability of any one node being dropped when a dropout layer is used</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dropout_layer_rate</span>
 
-    <span class="k">def</span> <span class="nf">write_inc_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file_path</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Writing INC config files has not be implemented yet for text classification&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="TextClassificationModel.write_inc_config_file"><a class="viewcode-back" href="../../../../_autosummary/tlt.models.text_classification.text_classification_model.TextClassificationModel.write_inc_config_file.html#tlt.models.text_classification.text_classification_model.TextClassificationModel.write_inc_config_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_inc_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file_path</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Writing INC config files has not be implemented yet for text classification&quot;</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">inc_config_path</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Post training quantization has not been implemented yet for text classification&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="TextClassificationModel.quantize"><a class="viewcode-back" href="../../../../_autosummary/tlt.models.text_classification.text_classification_model.TextClassificationModel.quantize.html#tlt.models.text_classification.text_classification_model.TextClassificationModel.quantize">[docs]</a>    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">inc_config_path</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Post training quantization has not been implemented yet for text classification&quot;</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">optimize_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Optimize graph has not been implemented yet for text classification&quot;</span><span class="p">)</span>
@@ -173,7 +179,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

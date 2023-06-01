@@ -47,7 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docbuild.html">Building Documentation</a></li>
@@ -158,13 +158,13 @@
 <span class="sd">            num_workers (int): Number of workers to pass into a DataLoader.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            FileNotFoundError if the csv file is not found in the dataset directory</span>
-<span class="sd">            TypeError if label_map_func is not callable</span>
-<span class="sd">            ValueError if class_names list is empty</span>
-<span class="sd">            ValueError if column_names list does not contain the value &#39;label&#39;</span>
-<span class="sd">            ValueError if index of &#39;label&#39; in column_names and label_col mismatch</span>
-<span class="sd">            ValueError if the values of column_names are not strings.</span>
-<span class="sd">            ValueError if column_names contains more than one value as &#39;label&#39;</span>
+<span class="sd">            FileNotFoundError: if the csv file is not found in the dataset directory</span>
+<span class="sd">            TypeError: if label_map_func is not callable</span>
+<span class="sd">            ValueError: if class_names list is empty</span>
+<span class="sd">            ValueError: if column_names list does not contain the value &#39;label&#39;</span>
+<span class="sd">            ValueError: if index of &#39;label&#39; in column_names and label_col mismatch</span>
+<span class="sd">            ValueError: if the values of column_names are not strings.</span>
+<span class="sd">            ValueError: if column_names contains more than one value as &#39;label&#39;</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Sanity checks</span>
@@ -270,7 +270,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

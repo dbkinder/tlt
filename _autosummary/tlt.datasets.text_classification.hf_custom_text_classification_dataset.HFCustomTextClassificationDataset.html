@@ -50,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../api.html#datasets">Datasets</a><ul class="current">
@@ -150,13 +150,13 @@ exclude_cols can be specified.</p></li>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>FileNotFoundError if the csv file is not found in the dataset directory</strong> – </p></li>
-<li><p><strong>TypeError if label_map_func is not callable</strong> – </p></li>
-<li><p><strong>ValueError if class_names list is empty</strong> – </p></li>
-<li><p><strong>ValueError if column_names list does not contain the value 'label'</strong> – </p></li>
-<li><p><strong>ValueError if index of 'label' in column_names and label_col mismatch</strong> – </p></li>
-<li><p><strong>ValueError if the values of column_names are not strings.</strong> – </p></li>
-<li><p><strong>ValueError if column_names contains more than one value as 'label'</strong> – </p></li>
+<li><p><strong>FileNotFoundError</strong> – if the csv file is not found in the dataset directory</p></li>
+<li><p><strong>TypeError</strong> – if label_map_func is not callable</p></li>
+<li><p><strong>ValueError</strong> – if class_names list is empty</p></li>
+<li><p><strong>ValueError</strong> – if column_names list does not contain the value ‘label’</p></li>
+<li><p><strong>ValueError</strong> – if index of ‘label’ in column_names and label_col mismatch</p></li>
+<li><p><strong>ValueError</strong> – if the values of column_names are not strings.</p></li>
+<li><p><strong>ValueError</strong> – if column_names contains more than one value as ‘label’</p></li>
 </ul>
 </dd>
 </dl>
@@ -250,7 +250,7 @@ exclude_cols can be specified.</p></li>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

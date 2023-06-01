@@ -47,7 +47,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../cli.html">CLI Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../docbuild.html">Building Documentation</a></li>
@@ -355,7 +355,7 @@
                 <span class="p">},</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">,</span> <span class="s1">&#39;checkpoint.pt&#39;</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_fit_distributed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostfile</span><span class="p">,</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">nproc_per_node</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">ipex_optimize</span><span class="p">):</span>
-        <span class="n">distributed_text_script</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TLT_DISTRIBUTED_DIR</span><span class="p">,</span> <span class="s2">&quot;run_train_pyt.py&quot;</span><span class="p">)</span>
+        <span class="n">distributed_text_script</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TLT_DISTRIBUTED_DIR</span><span class="p">,</span> <span class="s2">&quot;pytorch&quot;</span><span class="p">,</span> <span class="s2">&quot;run_train_pyt.py&quot;</span><span class="p">)</span>
 
         <span class="n">default_port</span> <span class="o">=</span> <span class="s1">&#39;29500&#39;</span>
         <span class="n">default_master_addr</span> <span class="o">=</span> <span class="s1">&#39;127.0.0.1&#39;</span>
@@ -405,7 +405,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)</span>
         <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">bash_command</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span>
+<div class="viewcode-block" id="PyTorchHFTextClassificationModel.train"><a class="viewcode-back" href="../../../../_autosummary/tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.train.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">dataset</span><span class="p">,</span>
         <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -466,8 +466,8 @@
 <span class="sd">            Dictionary containing the model training history</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            TypeError if the dataset specified is not a TextClassificationDataset/datasets.arrow_dataset.Dataset</span>
-<span class="sd">            ValueError if the given dataset has not been preprocessed yet</span>
+<span class="sd">            TypeError: if the dataset specified is not a TextClassificationDataset/datasets.arrow_dataset.Dataset</span>
+<span class="sd">            ValueError: if the given dataset has not been preprocessed yet</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_train_inputs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">TextClassificationDataset</span><span class="p">,</span>
@@ -562,7 +562,7 @@
             <span class="c1"># Call the _fit method to train the model with native PyTorch API</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fit</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">do_eval</span><span class="p">,</span> <span class="n">early_stopping</span><span class="p">,</span> <span class="n">lr_decay</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_history</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_history</span></div>
 
     <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataset_or_dataloader</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -577,7 +577,7 @@
 <span class="sd">               Tuple with loss and accuracy metrics</span>
 
 <span class="sd">           Raises:</span>
-<span class="sd">               TypeError if the dataset specified is not a datasets.arrow_dataset.Dataset (or) a</span>
+<span class="sd">               TypeError: if the dataset specified is not a datasets.arrow_dataset.Dataset (or) a</span>
 <span class="sd">                    TextClassificationDataset (or) a DataLoader</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trainer</span><span class="p">:</span>
@@ -650,7 +650,7 @@
 <span class="sd">               Torch Tensor of scores or HF SequenceClassifierOutput if return_raw is set to True.</span>
 
 <span class="sd">           Raises:</span>
-<span class="sd">               NotImplementedError if the given input_samples is of type DataLoader</span>
+<span class="sd">               NotImplementedError: if the given input_samples is of type DataLoader</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">encoded_input</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -730,7 +730,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">dill</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">model_copy</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">write_inc_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file_path</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="PyTorchHFTextClassificationModel.write_inc_config_file"><a class="viewcode-back" href="../../../../_autosummary/tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.write_inc_config_file.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.write_inc_config_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_inc_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file_path</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                               <span class="n">resize_interpolation</span><span class="o">=</span><span class="s1">&#39;bicubic&#39;</span><span class="p">,</span> <span class="n">accuracy_criterion_relative</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">exit_policy_timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                               <span class="n">exit_policy_max_trials</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">tuning_random_seed</span><span class="o">=</span><span class="mi">9527</span><span class="p">,</span>
                               <span class="n">tuning_workspace</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
@@ -759,9 +759,9 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
 <span class="sd">        Raises:</span>
-<span class="sd">            FileExistsError if the config file already exists and overwrite is set to False.</span>
-<span class="sd">            ValueError if the parameters are not within the expected values</span>
-<span class="sd">            NotImplementedError if the dataset type is not HFCustomImageClassificationDataset.</span>
+<span class="sd">            FileExistsError: if the config file already exists and overwrite is set to False.</span>
+<span class="sd">            ValueError: if the parameters are not within the expected values</span>
+<span class="sd">            NotImplementedError: if the dataset type is not HFCustomImageClassificationDataset.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="s1">&#39;A file already exists at: </span><span class="si">{}</span><span class="s1">. Provide a new file path or set overwrite=True&#39;</span><span class="p">,</span>
@@ -879,9 +879,9 @@
 
         <span class="c1"># Write the config file</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
-            <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config_template</span><span class="p">,</span> <span class="n">config_file</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config_template</span><span class="p">,</span> <span class="n">config_file</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">inc_config_path</span><span class="p">):</span>
+<div class="viewcode-block" id="PyTorchHFTextClassificationModel.quantize"><a class="viewcode-back" href="../../../../_autosummary/tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize">[docs]</a>    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">inc_config_path</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Performs post training quantization using the Intel Neural Compressor on the model</span>
 <span class="sd">        using the specified config file. The quantized model is written to the output directory.</span>
@@ -894,9 +894,9 @@
 <span class="sd">            None</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            FileNotFoundError if a model.pt is not found in the model or if the inc_config_path file</span>
+<span class="sd">            FileNotFoundError: if a model.pt is not found in the model or if the inc_config_path file</span>
 <span class="sd">            is not found.</span>
-<span class="sd">            FileExistsError if the output_dir already has a model.pt file</span>
+<span class="sd">            FileExistsError: if the output_dir already has a model.pt file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Verify that the config file exists</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">inc_config_path</span><span class="p">):</span>
@@ -922,7 +922,7 @@
             <span class="c1"># Change the model filename from best_model.pt to model.pt to match our convention</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;mv&quot;</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&quot;/best_model.pt&quot;</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&quot;/model.pt&quot;</span><span class="p">],</span>
                                  <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="nf">list_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1002,7 +1002,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 

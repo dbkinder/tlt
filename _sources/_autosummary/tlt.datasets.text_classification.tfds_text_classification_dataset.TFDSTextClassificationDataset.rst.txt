@@ -15,6 +15,7 @@
    
       ~TFDSTextClassificationDataset.__init__
       ~TFDSTextClassificationDataset.get_batch
+      ~TFDSTextClassificationDataset.get_inc_dataloaders
       ~TFDSTextClassificationDataset.get_str_label
       ~TFDSTextClassificationDataset.preprocess
       ~TFDSTextClassificationDataset.shuffle_split

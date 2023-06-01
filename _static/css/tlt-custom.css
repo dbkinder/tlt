@@ -10,9 +10,21 @@
 
 /* reduce size of images in the body to 60% width and center*/
 .rst-content img {
-  max-width: 80%;
+  max-width: 60%;
   height: auto;
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+/* add an underline to title headings */
+.rst-content h1,h2,h3,h4,h5 {
+    text-decoration: underline;
+}
+
+/* add icon on external links */
+a.reference.external::after {
+    font-family: 'FontAwesome';
+    font-size: 80%;
+    content: " \f08e";
 }

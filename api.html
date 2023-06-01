@@ -22,7 +22,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="tlt.datasets.image_classification.tfds_image_classification_dataset.TFDSImageClassificationDataset" href="_autosummary/tlt.datasets.image_classification.tfds_image_classification_dataset.TFDSImageClassificationDataset.html" />
-    <link rel="prev" title="Text Classification Intel Transfer Learning Tool CLI Examples" href="examples/cli/text_classification.html" /> 
+    <link rel="prev" title="CLI Reference" href="cli.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Models.html">Supported Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="DATASETS.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="distributed.html">Distributed Training</a></li>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/examples.html">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#datasets">Datasets</a><ul>
@@ -165,7 +165,7 @@ class_a,&lt;text&gt;
 <dd class="field-even"><p>(dataset)</p>
 </dd>
 <dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>NotImplementedError if the type of dataset being loaded is not supported</strong> – </p>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – if the type of dataset being loaded is not supported</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -200,7 +200,7 @@ datasets for PyTorch NLP models or Hugging Face models.</p></li>
 <dd class="field-even"><p>(dataset)</p>
 </dd>
 <dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>NotImplementedError if the dataset requested is not supported yet</strong> – </p>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – if the dataset requested is not supported yet</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -360,7 +360,7 @@ for the PyTorch Adam optimizer). Refer to the framework documentation for the fu
 <dd class="field-even"><p>model object</p>
 </dd>
 <dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>NotImplementedError if the model requested is not supported yet</strong> – </p>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – if the model requested is not supported yet</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -388,7 +388,7 @@ The leaf items in the dictionary are attributes about the pretrained model.</p>
 <dd class="field-even"><p>dictionary</p>
 </dd>
 <dt class="field-odd">Raises</dt>
-<dd class="field-odd"><p><strong>NameError if a model config file is found with an unknown</strong><strong> or </strong><strong>missing use case</strong> – </p>
+<dd class="field-odd"><p><strong>NameError</strong> – if a model config file is found with an unknown or missing use case</p>
 </dd>
 </dl>
 </dd></dl>
@@ -422,27 +422,6 @@ Not compatible with verbose=True.</p></li>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tfhub_image_classification_model.TFHubImageClassificationModel</span></code></a></p></td>
-<td><p>Class to represent a TF Hub pretrained model for image classification</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/tlt.models.image_classification.tf_image_classification_model.TFImageClassificationModel.html#tlt.models.image_classification.tf_image_classification_model.TFImageClassificationModel" title="tlt.models.image_classification.tf_image_classification_model.TFImageClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf_image_classification_model.TFImageClassificationModel</span></code></a></p></td>
-<td><p>Class to represent a TF custom pretrained model for image classification</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tlt.models.image_classification.keras_image_classification_model.KerasImageClassificationModel.html#tlt.models.image_classification.keras_image_classification_model.KerasImageClassificationModel" title="tlt.models.image_classification.keras_image_classification_model.KerasImageClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keras_image_classification_model.KerasImageClassificationModel</span></code></a></p></td>
-<td><p>Class to represent a Keras.applications pretrained model for image classification</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/tlt.models.image_classification.torchvision_image_classification_model.TorchvisionImageClassificationModel.html#tlt.models.image_classification.torchvision_image_classification_model.TorchvisionImageClassificationModel" title="tlt.models.image_classification.torchvision_image_classification_model.TorchvisionImageClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">torchvision_image_classification_model.TorchvisionImageClassificationModel</span></code></a></p></td>
-<td><p>Class to represent a Torchvision pretrained model for image classification</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tlt.models.image_classification.pytorch_image_classification_model.PyTorchImageClassificationModel.html#tlt.models.image_classification.pytorch_image_classification_model.PyTorchImageClassificationModel" title="tlt.models.image_classification.pytorch_image_classification_model.PyTorchImageClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_image_classification_model.PyTorchImageClassificationModel</span></code></a></p></td>
-<td><p>Class to represent a PyTorch model for image classification</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/tlt.models.image_classification.pytorch_hub_image_classification_model.PyTorchHubImageClassificationModel.html#tlt.models.image_classification.pytorch_hub_image_classification_model.PyTorchHubImageClassificationModel" title="tlt.models.image_classification.pytorch_hub_image_classification_model.PyTorchHubImageClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_hub_image_classification_model.PyTorchHubImageClassificationModel</span></code></a></p></td>
-<td><p>Class to represent a PyTorch Hub pretrained model for image classification</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tlt.models.image_classification.image_classification_model.ImageClassificationModel.html#tlt.models.image_classification.image_classification_model.ImageClassificationModel" title="tlt.models.image_classification.image_classification_model.ImageClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">image_classification_model.ImageClassificationModel</span></code></a></p></td>
-<td><p>Base class to represent a pretrained model for image classification</p></td>
-</tr>
 </tbody>
 </table>
 </section>
@@ -454,14 +433,8 @@ Not compatible with verbose=True.</p></li>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel.html#tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel" title="tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf_text_classification_model.TFTextClassificationModel</span></code></a></p></td>
-<td><p>Class to represent a TF pretrained model that can be used for binary text classification fine tuning.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel" title="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel" title="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel</span></code></a></p></td>
 <td><p>Class to represent a PyTorch Hugging Face pretrained model that can be used for multi-class text classification fine tuning.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel.html#tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel" title="tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf_hf_text_classification_model.TFHFTextClassificationModel</span></code></a></p></td>
-<td><p>Class to represent a TensorFlow pretrained model from Hugging Face that can be used for binary text classification fine tuning.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="_autosummary/tlt.models.text_classification.text_classification_model.TextClassificationModel.html#tlt.models.text_classification.text_classification_model.TextClassificationModel" title="tlt.models.text_classification.text_classification_model.TextClassificationModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">text_classification_model.TextClassificationModel</span></code></a></p></td>
 <td><p>Class to represent a pretrained model for text classification</p></td>
@@ -481,12 +454,6 @@ Not compatible with verbose=True.</p></li>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tlt.models.pytorch_model.PyTorchModel.html#tlt.models.pytorch_model.PyTorchModel" title="tlt.models.pytorch_model.PyTorchModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pytorch_model.PyTorchModel</span></code></a></p></td>
-<td><p>Base class to represent a PyTorch model</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="_autosummary/tlt.models.tf_model.TFModel.html#tlt.models.tf_model.TFModel" title="tlt.models.tf_model.TFModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tf_model.TFModel</span></code></a></p></td>
-<td><p>Base class to represent a TF pretrained model</p></td>
-</tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="_autosummary/tlt.models.hf_model.HFModel.html#tlt.models.hf_model.HFModel" title="tlt.models.hf_model.HFModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hf_model.HFModel</span></code></a></p></td>
 <td><p>Base class to represent a Hugging Face model</p></td>
 </tr>
@@ -504,7 +471,7 @@ Not compatible with verbose=True.</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="examples/cli/text_classification.html" class="btn btn-neutral float-left" title="Text Classification Intel Transfer Learning Tool CLI Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cli.html" class="btn btn-neutral float-left" title="CLI Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="_autosummary/tlt.datasets.image_classification.tfds_image_classification_dataset.TFDSImageClassificationDataset.html" class="btn btn-neutral float-right" title="tlt.datasets.image_classification.tfds_image_classification_dataset.TFDSImageClassificationDataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
@@ -512,7 +479,7 @@ Not compatible with verbose=True.</p></li>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on May 26, 2023.
+      <span class="lastupdated">Last updated on Jun 01, 2023.
       </span></p>
   </div>
 
