@@ -1,9 +1,9 @@
-/* make the page width use more of the window */
+/* allow the page to use more of the window width */
 .wy-nav-content {
        max-width: 1100px;
    }
 
-/* allow wrapping in a table */
+/* allow text wrapping in a table to avoid table horizontal scrolling */
 .wy-table-responsive table td, .wy-table-responsive table th {
         white-space: normal !important;
     }
@@ -22,9 +22,10 @@
     text-decoration: underline;
 }
 
-/* add icon on external links */
+/* add icon on external links 
 a.reference.external::after {
     font-family: 'FontAwesome';
     font-size: 80%;
     content: " \f08e";
 }
+*/
