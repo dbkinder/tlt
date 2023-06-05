@@ -19,7 +19,7 @@
       ~PyTorchHubImageClassificationModel.export
       ~PyTorchHubImageClassificationModel.export_for_distributed
       ~PyTorchHubImageClassificationModel.freeze_layer
-      ~PyTorchHubImageClassificationModel.get_inc_config_template_dict
+      ~PyTorchHubImageClassificationModel.get_inc_config
       ~PyTorchHubImageClassificationModel.list_layers
       ~PyTorchHubImageClassificationModel.load_from_directory
       ~PyTorchHubImageClassificationModel.optimize_graph
@@ -27,7 +27,6 @@
       ~PyTorchHubImageClassificationModel.quantize
       ~PyTorchHubImageClassificationModel.train
       ~PyTorchHubImageClassificationModel.unfreeze_layer
-      ~PyTorchHubImageClassificationModel.write_inc_config_file
    
    
 

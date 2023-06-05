@@ -19,14 +19,13 @@
       ~TFHubImageClassificationModel.evaluate
       ~TFHubImageClassificationModel.export
       ~TFHubImageClassificationModel.export_for_distributed
-      ~TFHubImageClassificationModel.get_inc_config_template_dict
+      ~TFHubImageClassificationModel.get_inc_config
       ~TFHubImageClassificationModel.load_from_directory
       ~TFHubImageClassificationModel.optimize_graph
       ~TFHubImageClassificationModel.predict
       ~TFHubImageClassificationModel.quantize
       ~TFHubImageClassificationModel.set_auto_mixed_precision
       ~TFHubImageClassificationModel.train
-      ~TFHubImageClassificationModel.write_inc_config_file
    
    
 

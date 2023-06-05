@@ -19,14 +19,13 @@
       ~KerasImageClassificationModel.evaluate
       ~KerasImageClassificationModel.export
       ~KerasImageClassificationModel.export_for_distributed
-      ~KerasImageClassificationModel.get_inc_config_template_dict
+      ~KerasImageClassificationModel.get_inc_config
       ~KerasImageClassificationModel.load_from_directory
       ~KerasImageClassificationModel.optimize_graph
       ~KerasImageClassificationModel.predict
       ~KerasImageClassificationModel.quantize
       ~KerasImageClassificationModel.set_auto_mixed_precision
       ~KerasImageClassificationModel.train
-      ~KerasImageClassificationModel.write_inc_config_file
    
    
 

@@ -8,18 +8,23 @@
         white-space: normal !important;
     }
 
-/* reduce size of images in the body to 60% width and center*/
+/* center all images */ 
 .rst-content img {
-  max-width: 60%;
-  height: auto;
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* add an underline to title headings */
+/* reduce size of a specific image */
+.rst-content #how-the-intel-transfer-learning-tool-works img {
+  max-width: 70%;
+  height: auto;
+}
+
+/* add an underline to title headings and wrap long API headings */
 .rst-content h1,h2,h3,h4,h5 {
     text-decoration: underline;
+    word-wrap: break-word;
 }
 
 /* add icon on external links 

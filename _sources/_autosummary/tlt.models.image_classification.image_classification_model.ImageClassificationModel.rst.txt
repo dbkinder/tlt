@@ -17,13 +17,12 @@
       ~ImageClassificationModel.benchmark
       ~ImageClassificationModel.evaluate
       ~ImageClassificationModel.export
-      ~ImageClassificationModel.get_inc_config_template_dict
+      ~ImageClassificationModel.get_inc_config
       ~ImageClassificationModel.load_from_directory
       ~ImageClassificationModel.optimize_graph
       ~ImageClassificationModel.predict
       ~ImageClassificationModel.quantize
       ~ImageClassificationModel.train
-      ~ImageClassificationModel.write_inc_config_file
    
    
 

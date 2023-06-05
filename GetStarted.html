@@ -140,7 +140,7 @@ approaches.</p>
 <ol class="arabic">
 <li><p><strong>Install Dependencies</strong></p>
 <p>Install required packages using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">python3</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgl1</span> <span class="n">libglib2</span><span class="mf">.0</span><span class="o">-</span><span class="mi">0</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">python3</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgl1</span> <span class="n">libglib2</span><span class="mf">.0</span><span class="o">-</span><span class="mi">0</span>
 </pre></div>
 </div>
 </li>
@@ -164,7 +164,7 @@ for consistent package management.  There are two ways to do this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">intel</span><span class="o">-</span><span class="n">transfer</span><span class="o">-</span><span class="n">learning</span><span class="o">-</span><span class="n">tool</span>
 </pre></div>
 </div>
-<p>b. <strong>Developer Installation</strong></p>
+<p>b. <strong>Advanced Installation</strong></p>
 <p>Clone the repo:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">IntelAI</span><span class="o">/</span><span class="n">transfer</span><span class="o">-</span><span class="n">learning</span><span class="o">.</span><span class="n">git</span>
 <span class="n">cd</span> <span class="n">transfer</span><span class="o">-</span><span class="n">learning</span>
@@ -208,7 +208,7 @@ examples use the Intel Transfer Learning Tool’s custom dataset option
 DATASET_DIR=/tmp/dataset
 mkdir -p ${DATASET_DIR}
 
-# Download and extract the dataset
+# Download and extract the dataset (be sure https_proxy is set if needed)
 wget -P ${DATASET_DIR} https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz
 tar -xzf ${DATASET_DIR}/flower_photos.tgz -C ${DATASET_DIR}
 
@@ -370,7 +370,7 @@ CLI commands in the <a class="reference internal" href="cli.html"><span class="d
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 02, 2023.
+      <span class="lastupdated">Last updated on Jun 05, 2023.
       </span></p>
   </div>
 

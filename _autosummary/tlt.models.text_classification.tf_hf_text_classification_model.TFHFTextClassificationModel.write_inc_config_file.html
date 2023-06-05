@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel.write_inc_config_file &mdash; Intel® Transfer Learning Tool 0.2.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tlt-custom.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon-intel-32x32.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Intel® Transfer Learning Tool
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Documentation Home</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../GetStarted.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Models.html">Supported Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DATASETS.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../distributed.html">Distributed Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">CLI Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docbuild.html">Building Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Legal.html">Legal Information</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/IntelAI/transfer-learning-tool">GitHub Repository</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Intel® Transfer Learning Tool</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel.write_inc_config_file</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel.write_inc_config_file.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tlt-models-text-classification-tf-hf-text-classification-model-tfhftextclassificationmodel-write-inc-config-file">
+<h1>tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel.write_inc_config_file<a class="headerlink" href="#tlt-models-text-classification-tf-hf-text-classification-model-tfhftextclassificationmodel-write-inc-config-file" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel.write_inc_config_file">
+<span class="sig-prename descclassname"><span class="pre">TFHFTextClassificationModel.</span></span><span class="sig-name descname"><span class="pre">write_inc_config_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resize_interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bicubic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accuracy_criterion_relative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_policy_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_policy_max_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tuning_random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9527</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tuning_workspace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tlt.models.text_classification.tf_hf_text_classification_model.TFHFTextClassificationModel.write_inc_config_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes an Intel Neural Compressor compatible config file to the specified path usings args from the specified
+dataset and parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config_file_path</strong> (<em>str</em>) – Destination path on where to write the .yaml config file.</p></li>
+<li><p><strong>dataset</strong> (<a class="reference internal" href="tlt.datasets.dataset.BaseDataset.html#tlt.datasets.dataset.BaseDataset" title="tlt.datasets.dataset.BaseDataset"><em>BaseDataset</em></a>) – A tlt dataset object</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – Batch size to use for quantization and evaluation</p></li>
+<li><p><strong>overwrite</strong> (<em>bool</em>) – Specify whether or not to overwrite the config_file_path, if it already exists
+(default: False)</p></li>
+<li><p><strong>resize_interpolation</strong> (<em>str</em>) – Interpolation type. Select from: ‘bilinear’, ‘nearest’, ‘bicubic’
+(default: bicubic)</p></li>
+<li><p><strong>accuracy_criterion_relative</strong> (<em>float</em>) – Relative accuracy loss (default: 0.01, which is 1%)</p></li>
+<li><p><strong>exit_policy_timeout</strong> (<em>int</em>) – Tuning timeout in seconds (default: 0). Tuning processing finishes when the
+timeout or max_trials is reached. A tuning timeout of 0 means that the tuning
+phase stops when the accuracy criterion is met.</p></li>
+<li><p><strong>exit_policy_max_trials</strong> (<em>int</em>) – Maximum number of tuning trials (default: 50). Tuning processing finishes when
+the timeout or or max_trials is reached.</p></li>
+<li><p><strong>tuning_random_seed</strong> (<em>int</em>) – Random seed for deterministic tuning (default: 9527).</p></li>
+<li><p><strong>tuning_workspace</strong> (<em>dir</em>) – Path the Intel Neural Compressor nc_workspace folder. If the string is empty and the
+OUTPUT_DIR env var is set, that output directory will be used. If the string is
+empty and the OUTPUT_DIR env var is not set, the default Intel Neural Compressor
+nc_workspace location will be used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>FileExistsError</strong> – if the config file already exists and overwrite is set to False.</p></li>
+<li><p><strong>ValueError</strong> – if the parameters are not within the expected values</p></li>
+<li><p><strong>NotImplementedError</strong> – if the dataset type is not TFCustomImageClassificationDataset.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2023, Intel Corporation.
+      <span class="lastupdated">Last updated on Jun 05, 2023.
+      </span></p>
+  </div>
+
+  
+*Other names and brands may be claimed as the property of others.
+<a href="http://www.intel.com/content/www/us/en/legal/trademarks.html">Trademarks</a>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

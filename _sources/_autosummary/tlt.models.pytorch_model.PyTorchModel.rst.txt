@@ -25,7 +25,6 @@
       ~PyTorchModel.quantize
       ~PyTorchModel.train
       ~PyTorchModel.unfreeze_layer
-      ~PyTorchModel.write_inc_config_file
    
    
 

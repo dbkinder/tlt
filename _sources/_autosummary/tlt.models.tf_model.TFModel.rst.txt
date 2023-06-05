@@ -25,7 +25,6 @@
       ~TFModel.quantize
       ~TFModel.set_auto_mixed_precision
       ~TFModel.train
-      ~TFModel.write_inc_config_file
    
    
 

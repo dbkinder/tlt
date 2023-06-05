@@ -19,7 +19,7 @@
       ~TorchvisionImageClassificationModel.export
       ~TorchvisionImageClassificationModel.export_for_distributed
       ~TorchvisionImageClassificationModel.freeze_layer
-      ~TorchvisionImageClassificationModel.get_inc_config_template_dict
+      ~TorchvisionImageClassificationModel.get_inc_config
       ~TorchvisionImageClassificationModel.list_layers
       ~TorchvisionImageClassificationModel.load_from_directory
       ~TorchvisionImageClassificationModel.optimize_graph
@@ -27,7 +27,6 @@
       ~TorchvisionImageClassificationModel.quantize
       ~TorchvisionImageClassificationModel.train
       ~TorchvisionImageClassificationModel.unfreeze_layer
-      ~TorchvisionImageClassificationModel.write_inc_config_file
    
    
 
