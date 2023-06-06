@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -71,6 +73,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docbuild.html">Building Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Legal.html">Legal Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/IntelAI/transfer-learning-tool">GitHub Repository</a></li>
 </ul>
 
@@ -99,14 +102,14 @@
            <div itemprop="articleBody">
              
   <section id="cli-reference">
-<h1>CLI Reference<a class="headerlink" href="#cli-reference" title="Permalink to this headline">¶</a></h1>
+<h1>CLI Reference<a class="headerlink" href="#cli-reference" title="Permalink to this heading">¶</a></h1>
 <section id="tlt">
-<h2>tlt<a class="headerlink" href="#tlt" title="Permalink to this headline">¶</a></h2>
+<h2>tlt<a class="headerlink" href="#tlt" title="Permalink to this heading">¶</a></h2>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
 </pre></div>
 </div>
 <section id="tlt-benchmark">
-<h3>benchmark<a class="headerlink" href="#tlt-benchmark" title="Permalink to this headline">¶</a></h3>
+<h3>benchmark<a class="headerlink" href="#tlt-benchmark" title="Permalink to this heading">¶</a></h3>
 <p>Uses the Intel Neural Compressor to benchmark a trained model</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span>benchmark<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
@@ -163,7 +166,7 @@
 
 </section>
 <section id="tlt-eval">
-<h3>eval<a class="headerlink" href="#tlt-eval" title="Permalink to this headline">¶</a></h3>
+<h3>eval<a class="headerlink" href="#tlt-eval" title="Permalink to this heading">¶</a></h3>
 <p>Evaluates a model that has already been trained</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span><span class="nb">eval</span><span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
@@ -224,20 +227,20 @@
 
 </section>
 <section id="tlt-list">
-<h3>list<a class="headerlink" href="#tlt-list" title="Permalink to this headline">¶</a></h3>
+<h3>list<a class="headerlink" href="#tlt-list" title="Permalink to this heading">¶</a></h3>
 <p>Lists the available frameworks, use cases, or models</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span>list<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
 </pre></div>
 </div>
 <section id="tlt-list-frameworks">
-<h4>frameworks<a class="headerlink" href="#tlt-list-frameworks" title="Permalink to this headline">¶</a></h4>
+<h4>frameworks<a class="headerlink" href="#tlt-list-frameworks" title="Permalink to this heading">¶</a></h4>
 <p>List the available frameworks</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span>list<span class="w"> </span>frameworks<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
 </section>
 <section id="tlt-list-models">
-<h4>models<a class="headerlink" href="#tlt-list-models" title="Permalink to this headline">¶</a></h4>
+<h4>models<a class="headerlink" href="#tlt-list-models" title="Permalink to this heading">¶</a></h4>
 <p>List the available models</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span>list<span class="w"> </span>models<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
@@ -263,7 +266,7 @@
 
 </section>
 <section id="tlt-list-use-cases">
-<h4>use_cases<a class="headerlink" href="#tlt-list-use-cases" title="Permalink to this headline">¶</a></h4>
+<h4>use_cases<a class="headerlink" href="#tlt-list-use-cases" title="Permalink to this heading">¶</a></h4>
 <p>List the available use cases</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span>list<span class="w"> </span>use_cases<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
@@ -271,7 +274,7 @@
 </section>
 </section>
 <section id="tlt-optimize">
-<h3>optimize<a class="headerlink" href="#tlt-optimize" title="Permalink to this headline">¶</a></h3>
+<h3>optimize<a class="headerlink" href="#tlt-optimize" title="Permalink to this heading">¶</a></h3>
 <p>Uses the Intel Neural Compressor to perform graph optimization on a trained model</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span>optimize<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
@@ -291,7 +294,7 @@
 
 </section>
 <section id="tlt-quantize">
-<h3>quantize<a class="headerlink" href="#tlt-quantize" title="Permalink to this headline">¶</a></h3>
+<h3>quantize<a class="headerlink" href="#tlt-quantize" title="Permalink to this heading">¶</a></h3>
 <p>Uses the Intel Neural Compressor to perform post-training quantization on a trained model</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span>quantize<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
@@ -367,7 +370,7 @@
 
 </section>
 <section id="tlt-train">
-<h3>train<a class="headerlink" href="#tlt-train" title="Permalink to this headline">¶</a></h3>
+<h3>train<a class="headerlink" href="#tlt-train" title="Permalink to this heading">¶</a></h3>
 <p>Trains the model</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tlt<span class="w"> </span>train<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>

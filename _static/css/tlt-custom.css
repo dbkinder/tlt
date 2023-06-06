@@ -8,14 +8,14 @@
         white-space: normal !important;
     }
 
-/* center all images */ 
+/* center all images */
 .rst-content img {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-/* reduce size of a specific image */
+/* reduce size of a specific image from README.md */
 .rst-content #how-the-intel-transfer-learning-tool-works img {
   max-width: 70%;
   height: auto;
@@ -31,10 +31,3 @@
 .rst-content a.internal code.xref span.pre {
     color: #2980b9;
 }
-/* add icon on external links 
-a.reference.external::after {
-    font-family: 'FontAwesome';
-    font-size: 80%;
-    content: " \f08e";
-}
-*/

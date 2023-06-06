@@ -16,5 +16,6 @@
    api
    docbuild
    Legal
+   genindex
    GitHub Repository <https://github.com/IntelAI/transfer-learning-tool>
 

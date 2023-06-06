@@ -16,7 +16,9 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -54,7 +56,11 @@
 <li class="toctree-l1"><a class="reference internal" href="cli.html">CLI Reference</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#datasets">Datasets</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#module-tlt.datasets.dataset_factory">Factory Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tlt.datasets.dataset_factory">Factory Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tlt.datasets.dataset_factory.load_dataset"><code class="docutils literal notranslate"><span class="pre">load_dataset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tlt.datasets.dataset_factory.get_dataset"><code class="docutils literal notranslate"><span class="pre">get_dataset()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#class-reference">Class Reference</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#image-classification">Image Classification</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#text-classification">Text Classification</a></li>
@@ -64,7 +70,13 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#models">Models</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">Factory Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Factory Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tlt.models.model_factory.load_model"><code class="docutils literal notranslate"><span class="pre">load_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tlt.models.model_factory.get_model"><code class="docutils literal notranslate"><span class="pre">get_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tlt.models.model_factory.get_supported_models"><code class="docutils literal notranslate"><span class="pre">get_supported_models()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tlt.models.model_factory.print_supported_models"><code class="docutils literal notranslate"><span class="pre">print_supported_models()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Class Reference</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id3">Image Classification</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id4">Text Classification</a></li>
@@ -77,6 +89,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="docbuild.html">Building Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Legal.html">Legal Information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/IntelAI/transfer-learning-tool">GitHub Repository</a></li>
 </ul>
 
@@ -105,17 +118,17 @@
            <div itemprop="articleBody">
              
   <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading">¶</a></h1>
 <section id="datasets">
-<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
+<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this heading">¶</a></h2>
 <p>The simplest way to create datasets is with the dataset factory methods <code class="xref py py-meth docutils literal notranslate"><span class="pre">load_dataset()</span></code>, for using a
 custom dataset, and <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_dataset()</span></code>, for downloading and using a third-party dataset from a catalog such as TensorFlow
 Datasets or Torchvision.</p>
 <section id="module-tlt.datasets.dataset_factory">
-<span id="factory-methods"></span><h3>Factory Methods<a class="headerlink" href="#module-tlt.datasets.dataset_factory" title="Permalink to this headline">¶</a></h3>
+<span id="factory-methods"></span><h3>Factory Methods<a class="headerlink" href="#module-tlt.datasets.dataset_factory" title="Permalink to this heading">¶</a></h3>
 <dl class="py function">
 <dt class="sig sig-object py" id="tlt.datasets.dataset_factory.load_dataset">
-<span class="sig-prename descclassname"><span class="pre">tlt.datasets.dataset_factory.</span></span><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tlt.utils.types.UseCaseType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tlt.utils.types.FrameworkType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/datasets/dataset_factory.html#load_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.datasets.dataset_factory.load_dataset" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">tlt.datasets.dataset_factory.</span></span><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UseCaseType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FrameworkType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/datasets/dataset_factory.html#load_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.datasets.dataset_factory.load_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>A factory method for loading a custom dataset.</p>
 <p>Image classification datasets expect a directory of images organized with subfolders for each image class, which
 can themselves be in split directories named ‘train’, ‘validation’, and/or ‘test’. Each class subfolder should
@@ -180,7 +193,7 @@ class_a,&lt;text&gt;
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tlt.datasets.dataset_factory.get_dataset">
-<span class="sig-prename descclassname"><span class="pre">tlt.datasets.dataset_factory.</span></span><span class="sig-name descname"><span class="pre">get_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tlt.utils.types.UseCaseType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tlt.utils.types.FrameworkType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_catalog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/datasets/dataset_factory.html#get_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.datasets.dataset_factory.get_dataset" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">tlt.datasets.dataset_factory.</span></span><span class="sig-name descname"><span class="pre">get_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">UseCaseType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">FrameworkType</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_catalog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/datasets/dataset_factory.html#get_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.datasets.dataset_factory.get_dataset" title="Permalink to this definition">¶</a></dt>
 <dd><p>A factory method for using a dataset from a catalog.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -214,9 +227,9 @@ datasets for PyTorch NLP models or Hugging Face models.</p></li>
 
 </section>
 <section id="class-reference">
-<h3>Class Reference<a class="headerlink" href="#class-reference" title="Permalink to this headline">¶</a></h3>
+<h3>Class Reference<a class="headerlink" href="#class-reference" title="Permalink to this heading">¶</a></h3>
 <section id="image-classification">
-<h4>Image Classification<a class="headerlink" href="#image-classification" title="Permalink to this headline">¶</a></h4>
+<h4>Image Classification<a class="headerlink" href="#image-classification" title="Permalink to this heading">¶</a></h4>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -242,7 +255,7 @@ datasets for PyTorch NLP models or Hugging Face models.</p></li>
 </table>
 </section>
 <section id="text-classification">
-<h4>Text Classification<a class="headerlink" href="#text-classification" title="Permalink to this headline">¶</a></h4>
+<h4>Text Classification<a class="headerlink" href="#text-classification" title="Permalink to this heading">¶</a></h4>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -268,7 +281,7 @@ datasets for PyTorch NLP models or Hugging Face models.</p></li>
 </table>
 </section>
 <section id="base-classes">
-<h4>Base Classes<a class="headerlink" href="#base-classes" title="Permalink to this headline">¶</a></h4>
+<h4>Base Classes<a class="headerlink" href="#base-classes" title="Permalink to this heading">¶</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Users should rarely need to interact directly with these.</p>
@@ -297,16 +310,16 @@ datasets for PyTorch NLP models or Hugging Face models.</p></li>
 </section>
 </section>
 <section id="models">
-<h2>Models<a class="headerlink" href="#models" title="Permalink to this headline">¶</a></h2>
+<h2>Models<a class="headerlink" href="#models" title="Permalink to this heading">¶</a></h2>
 <p>Discover and work with available models by using model factory methods. The <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_model()</span></code> function will download
 third-party models, while the <code class="xref py py-meth docutils literal notranslate"><span class="pre">load_model()</span></code> function will load a custom model, from either a path location or a
 model object in memory. The model discovery and inspection methods are <code class="xref py py-meth docutils literal notranslate"><span class="pre">get_supported_models()</span></code> and
 <code class="xref py py-meth docutils literal notranslate"><span class="pre">print_supported_models()</span></code>.</p>
 <section id="id1">
-<h3>Factory Methods<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<h3>Factory Methods<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <span class="target" id="module-tlt.models.model_factory"></span><dl class="py function">
 <dt class="sig sig-object py" id="tlt.models.model_factory.load_model">
-<span class="sig-prename descclassname"><span class="pre">tlt.models.model_factory.</span></span><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tlt.utils.types.FrameworkType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tlt.utils.types.UseCaseType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_hub</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/models/model_factory.html#load_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.models.model_factory.load_model" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">tlt.models.model_factory.</span></span><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">FrameworkType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">UseCaseType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_hub</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/models/model_factory.html#load_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.models.model_factory.load_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>A factory method for loading an existing model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -340,7 +353,7 @@ for the PyTorch Adam optimizer). Refer to the framework documentation for the fu
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tlt.models.model_factory.get_model">
-<span class="sig-prename descclassname"><span class="pre">tlt.models.model_factory.</span></span><span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tlt.utils.types.FrameworkType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tlt.utils.types.UseCaseType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/models/model_factory.html#get_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.models.model_factory.get_model" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">tlt.models.model_factory.</span></span><span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">FrameworkType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">UseCaseType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/models/model_factory.html#get_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.models.model_factory.get_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>A factory method for creating models.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -374,7 +387,7 @@ for the PyTorch Adam optimizer). Refer to the framework documentation for the fu
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tlt.models.model_factory.get_supported_models">
-<span class="sig-prename descclassname"><span class="pre">tlt.models.model_factory.</span></span><span class="sig-name descname"><span class="pre">get_supported_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tlt.utils.types.FrameworkType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tlt.utils.types.UseCaseType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/models/model_factory.html#get_supported_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.models.model_factory.get_supported_models" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">tlt.models.model_factory.</span></span><span class="sig-name descname"><span class="pre">get_supported_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">FrameworkType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">UseCaseType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/models/model_factory.html#get_supported_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.models.model_factory.get_supported_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary of supported models organized by use case, model name, and framework.
 The leaf items in the dictionary are attributes about the pretrained model.</p>
 <dl class="field-list simple">
@@ -395,7 +408,7 @@ The leaf items in the dictionary are attributes about the pretrained model.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="tlt.models.model_factory.print_supported_models">
-<span class="sig-prename descclassname"><span class="pre">tlt.models.model_factory.</span></span><span class="sig-name descname"><span class="pre">print_supported_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tlt.utils.types.FrameworkType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">tlt.utils.types.UseCaseType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markdown</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/models/model_factory.html#print_supported_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.models.model_factory.print_supported_models" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">tlt.models.model_factory.</span></span><span class="sig-name descname"><span class="pre">print_supported_models</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">framework</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">FrameworkType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_case</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">UseCaseType</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">markdown</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tlt/models/model_factory.html#print_supported_models"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tlt.models.model_factory.print_supported_models" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints a list of the supported models, categorized by use case. The results can be filtered to only show a given
 framework or use case.</p>
 <dl class="field-list simple">
@@ -413,9 +426,9 @@ Not compatible with verbose=True.</p></li>
 
 </section>
 <section id="id2">
-<h3>Class Reference<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<h3>Class Reference<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
 <section id="id3">
-<h4>Image Classification<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<h4>Image Classification<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h4>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -447,7 +460,7 @@ Not compatible with verbose=True.</p></li>
 </table>
 </section>
 <section id="id4">
-<h4>Text Classification<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<h4>Text Classification<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h4>
 <table class="autosummary longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -470,7 +483,7 @@ Not compatible with verbose=True.</p></li>
 </table>
 </section>
 <section id="id5">
-<h4>Base Classes<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<h4>Base Classes<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h4>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Users should rarely need to interact directly with these.</p>
