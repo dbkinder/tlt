@@ -46,13 +46,13 @@ Intel Transfer Learning Tool API Tutorial Notebooks
 
 .. csv-table::
    :header: "Notebook Title", ".ipynb Link", "Use Case", "Framework"
-   :widths: 60, 10, 20, 20
+   :widths: 30, 10, 20, 20
 
-   :doc:`Image Classification with PyTorch using the Intel® Transfer Learning Tool API <TLT_PyTorch_Image_Classification_Transfer_Learning>`, |imageClassPyTorch|_ , Image Classification, PyTorch & Intel Transfer Learning Tool
-   :doc:`Image Classification with TensorFlow using the Intel® Transfer Learning Tool API <TLT_TF_Image_Classification_Transfer_Learning>`, |imageClassTensorFlow|_ , Image Classification, TensorFlow & Intel Transfer Learning Tool
-   :doc:`Text Classification with PyTorch using the Intel® Transfer Learning Tool API <TLT_PyTorch_Text_Classification_Transfer_Learning>`, |textClassPyTorch|_ , Text Classification, PyTorch & Intel Transfer Learning Tool
-   :doc:`Text Classification with TensorFlow using the Intel® Transfer Learning Tool API <TLT_TF_Text_Classification_Transfer_Learning>`, |textClassTensorflow|_ , Text Classification, TensorFlow & Intel Transfer Learning Tool
-   :doc:`Anomaly Detection using PyTorch and the Intel® Transfer Learning Tool API<TLT_PyTorch_Anomly_Detection>`, |imageAnomalyPyTorch|_, Image Anomaly Detection, PyTorch & Intel Transfer Learning Tool
+   :doc:`Image Classification with PyTorch <TLT_PyTorch_Image_Classification_Transfer_Learning>`, |imageClassPyTorch|_ , Image Classification, PyTorch & Intel Transfer Learning Tool
+   :doc:`Image Classification with TensorFlow <TLT_TF_Image_Classification_Transfer_Learning>`, |imageClassTensorFlow|_ , Image Classification, TensorFlow & Intel Transfer Learning Tool
+   :doc:`Text Classification with PyTorch <TLT_PyTorch_Text_Classification_Transfer_Learning>`, |textClassPyTorch|_ , Text Classification, PyTorch & Intel Transfer Learning Tool
+   :doc:`Text Classification with TensorFlow <TLT_TF_Text_Classification_Transfer_Learning>`, |textClassTensorflow|_ , Text Classification, TensorFlow & Intel Transfer Learning Tool
+   :doc:`Anomaly Detection using PyTorch <TLT_PyTorch_Anomly_Detection>`, |imageAnomalyPyTorch|_, Image Anomaly Detection, PyTorch & Intel Transfer Learning Tool
 
 Intel Transfer Learning Tool API End-to-End Pipelines
 *****************************************************
@@ -70,8 +70,8 @@ Intel Transfer Learning Tool API End-to-End Pipelines
 
 .. csv-table::
    :header: "Notebook Title", ".ipynb Link", "Use Case", "Framework"
-   :widths: 60, 10, 20, 20
+   :widths: 30, 10, 20, 20
 
-   :doc:`Medical Imaging Classification (Colorectal histology) using TensorFlow and the Intel® Transfer Learning Tool API<Medical_Imaging_Classification>`, |imageClassMedical|_ , Image Classification, TensorFlow & Intel Transfer Learning Tool
-   :doc:`Remote Sensing Image Scene Classification (Resisc) using TensorFlow and the Intel® Transfer Learning Tool API<Remote_Sensing_Image_Scene_Classification>`, |imageClassRemote|_ , Image Classification, TensorFlow & Intel Transfer Learning Tool
+   :doc:`Medical Imaging Classification (Colorectal histology) using TensorFlow <Medical_Imaging_Classification>`, |imageClassMedical|_ , Image Classification, TensorFlow & Intel Transfer Learning Tool
+   :doc:`Remote Sensing Image Scene Classification (Resisc) using TensorFlow <Remote_Sensing_Image_Scene_Classification>`, |imageClassRemote|_ , Image Classification, TensorFlow & Intel Transfer Learning Tool
 
