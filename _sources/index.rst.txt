@@ -9,12 +9,10 @@
    Documentation Home <self>
    GetStarted
    Supported Models <Models>
-   DATASETS
    distributed
    examples/examples
    cli
    api
-   docbuild
    Legal
    genindex
    GitHub Repository <https://github.com/IntelAI/transfer-learning-tool>

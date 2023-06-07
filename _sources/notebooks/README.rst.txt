@@ -1,5 +1,5 @@
-Intel® Transfer Learning Tool API Examples
-==========================================
+Intel® Transfer Learning Tool API Notebook Examples
+===================================================
 
 .. toctree::
    :maxdepth: 1
