@@ -54,12 +54,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../distributed.html">Distributed Training</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Beyond Get Started CLI Example</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#list-the-available-models">List the available models</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#train-a-model">Train a model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#benchmark-the-trained-model">Benchmark the trained model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#quantize-the-model">Quantize the model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#benchmark-the-quantized-model">Benchmark the quantized model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#perform-graph-optimization-on-the-trained-model">Perform graph optimization on the trained model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-the-available-models">List the Available Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#train-a-model">Train a Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#benchmark-the-trained-model">Benchmark the Trained Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quantize-the-model">Quantize the Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#benchmark-the-quantized-model">Benchmark the Quantized Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#perform-graph-optimization-on-the-trained-model">Perform Graph Optimization on the Trained Model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#addititional-cli-examples">Addititional CLI Examples</a></li>
 </ul>
 </li>
@@ -113,7 +113,7 @@ and use cases.</p>
 <p>Use <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">--help</span></code> to see the list of CLI commands. More detailed information on
 each command can be found using <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">&lt;command&gt;</span> <span class="pre">--help</span></code> (such as <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">train</span> <span class="pre">--help</span></code>).</p>
 <section id="list-the-available-models">
-<h2>List the available models<a class="headerlink" href="#list-the-available-models" title="Permalink to this heading">¶</a></h2>
+<h2>List the Available Models<a class="headerlink" href="#list-the-available-models" title="Permalink to this heading">¶</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">list</span></code> command to see a list of available models for each framework.
 Use the <code class="docutils literal notranslate"><span class="pre">--use-case</span></code> flag to limit the list to models for a particular use case.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tlt</span> <span class="nb">list</span> <span class="n">models</span> <span class="o">--</span><span class="n">use</span><span class="o">-</span><span class="n">case</span> <span class="n">image_classification</span>
@@ -146,7 +146,7 @@ Use the <code class="docutils literal notranslate"><span class="pre">--use-case<
 </div>
 </section>
 <section id="train-a-model">
-<h2>Train a model<a class="headerlink" href="#train-a-model" title="Permalink to this heading">¶</a></h2>
+<h2>Train a Model<a class="headerlink" href="#train-a-model" title="Permalink to this heading">¶</a></h2>
 <p>For this example, we use the TensorFlow flowers dataset. Download and extract
 the dataset by following this example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Create a directory for the dataset to be downloaded
@@ -200,7 +200,7 @@ each run).</p>
 </div>
 </section>
 <section id="benchmark-the-trained-model">
-<h2>Benchmark the trained model<a class="headerlink" href="#benchmark-the-trained-model" title="Permalink to this heading">¶</a></h2>
+<h2>Benchmark the Trained Model<a class="headerlink" href="#benchmark-the-trained-model" title="Permalink to this heading">¶</a></h2>
 <p>Benchmark the performance of the trained model using <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">benchmark</span></code>.  Make sure
 to specify your own file paths for <code class="docutils literal notranslate"><span class="pre">model-dir</span></code> (including the numbered folder).
 The <code class="docutils literal notranslate"><span class="pre">dataset-dir</span></code> should point to the extracted dataset folder.</p>
@@ -222,7 +222,7 @@ The <code class="docutils literal notranslate"><span class="pre">dataset-dir</sp
 </div>
 </section>
 <section id="quantize-the-model">
-<h2>Quantize the model<a class="headerlink" href="#quantize-the-model" title="Permalink to this heading">¶</a></h2>
+<h2>Quantize the Model<a class="headerlink" href="#quantize-the-model" title="Permalink to this heading">¶</a></h2>
 <p>Perform post-training quantization using the <a class="reference external" href="https://github.com/intel/neural-compressor">Intel® Neural
 Compressor</a> using the <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">quantize</span></code>
 command. Make sure to specify your own file paths for <code class="docutils literal notranslate"><span class="pre">model-dir</span></code> (including the
@@ -271,7 +271,7 @@ INFO:tensorflow:SavedModel written to: /tmp/output/quantized/resnet_v1_50/1/save
 </div>
 </section>
 <section id="benchmark-the-quantized-model">
-<h2>Benchmark the quantized model<a class="headerlink" href="#benchmark-the-quantized-model" title="Permalink to this heading">¶</a></h2>
+<h2>Benchmark the Quantized Model<a class="headerlink" href="#benchmark-the-quantized-model" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">benchmark</span></code> command is used again, but this time the <code class="docutils literal notranslate"><span class="pre">model-dir</span></code> should point
 to the quantized model directory.
 Make sure to specify your own file paths for <code class="docutils literal notranslate"><span class="pre">model-dir</span></code> and <code class="docutils literal notranslate"><span class="pre">dataset-dir</span></code>. You can then compare
@@ -294,7 +294,7 @@ the performance of the full precision model to the quantized model.</p>
 </div>
 </section>
 <section id="perform-graph-optimization-on-the-trained-model">
-<h2>Perform graph optimization on the trained model<a class="headerlink" href="#perform-graph-optimization-on-the-trained-model" title="Permalink to this heading">¶</a></h2>
+<h2>Perform Graph Optimization on the Trained Model<a class="headerlink" href="#perform-graph-optimization-on-the-trained-model" title="Permalink to this heading">¶</a></h2>
 <p>Alternatively, the <a class="reference external" href="https://github.com/intel/neural-compressor">Intel Neural Compressor</a> can be used to optimize
 the full precision graph. Make sure to specify your own file paths for <code class="docutils literal notranslate"><span class="pre">model-dir</span></code> and <code class="docutils literal notranslate"><span class="pre">output-dir</span></code>.
 Note that graph optimization is also done as part of the quantization flow, so there is no need to call

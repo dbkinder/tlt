@@ -56,9 +56,9 @@
 <li class="toctree-l2"><a class="reference internal" href="README.html">Beyond Get Started CLI Example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_classification.html">Image Classification CLI Example</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Text Classification CLI Example</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#fine-tuning-using-your-own-dataset">Fine tuning using your own dataset</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#fine-tuning-using-a-dataset-from-the-tfds-catalog">Fine tuning using a dataset from the TFDS catalog</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#distributed-transfer-learning-using-a-dataset-from-hugging-face">Distributed transfer learning using a dataset from Hugging Face</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fine-tuning-using-your-own-dataset">Fine Tuning Using Your Own Dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#fine-tuning-using-a-dataset-from-the-tfds-catalog">Fine Tuning Using a Dataset from the TFDS Catalog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#distributed-transfer-learning-using-a-dataset-from-hugging-face">Distributed Transfer Learning Using a Dataset from Hugging Face</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#citations">Citations</a></li>
 </ul>
 </li>
@@ -100,7 +100,7 @@
   <section id="text-classification-intel-transfer-learning-tool-cli-example">
 <h1>Text Classification Intel® Transfer Learning Tool CLI Example<a class="headerlink" href="#text-classification-intel-transfer-learning-tool-cli-example" title="Permalink to this heading">¶</a></h1>
 <section id="fine-tuning-using-your-own-dataset">
-<h2>Fine tuning using your own dataset<a class="headerlink" href="#fine-tuning-using-your-own-dataset" title="Permalink to this heading">¶</a></h2>
+<h2>Fine Tuning Using Your Own Dataset<a class="headerlink" href="#fine-tuning-using-your-own-dataset" title="Permalink to this heading">¶</a></h2>
 <p>The example below shows how to fine tune a TensorFlow text classification model using your own
 dataset in the .csv format. The .csv file is expected to have 2 columns: a numerical class label
 and the text/sentence to classify. Note that although the TLT API is more flexible and allows for
@@ -113,7 +113,7 @@ separates the two columns. If no <code class="docutils literal notranslate"><spa
 <p>This example is downloading the <a class="reference external" href="https://archive-beta.ics.uci.edu/dataset/228/sms+spam+collection">SMS Spam Collection</a>
 dataset, which has a tab separated value file in the .zip file. This dataset has labeled SMS text
 messages that are either being classified as <code class="docutils literal notranslate"><span class="pre">ham</span></code> or <code class="docutils literal notranslate"><span class="pre">spam</span></code>. The first column in the data file has
-the label (<code class="docutils literal notranslate"><span class="pre">ham</span></code> or <code class="docutils literal notranslate"><span class="pre">spam</span></code>) and the second column is the text of the SMS mesage. The string class
+the label (<code class="docutils literal notranslate"><span class="pre">ham</span></code> or <code class="docutils literal notranslate"><span class="pre">spam</span></code>) and the second column is the text of the SMS message. The string class
 labels are replaced with numerical values before training.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create dataset and output directories</span>
 <span class="nv">DATASET_DIR</span><span class="o">=</span>/tmp/data
@@ -134,7 +134,7 @@ cp<span class="w"> </span><span class="si">${</span><span class="nv">DATASET_DIR
 sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/ham/0/g&#39;</span><span class="w"> </span><span class="si">${</span><span class="nv">DATASET_DIR</span><span class="si">}</span>/<span class="si">${</span><span class="nv">DATASET_FILE</span><span class="si">}</span>
 sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/spam/1/g&#39;</span><span class="w"> </span><span class="si">${</span><span class="nv">DATASET_DIR</span><span class="si">}</span>/<span class="si">${</span><span class="nv">DATASET_FILE</span><span class="si">}</span>
 
-<span class="c1"># Train google/bert_uncased_L-10_H-256_A-4 using our dataset file which has tab delimiters</span>
+<span class="c1"># Train google/bert_uncased_L-10_H-256_A-4 using our dataset file, which has tab delimiters</span>
 tlt<span class="w"> </span>train<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-f<span class="w"> </span>tensorflow<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--model-name<span class="w"> </span>google/bert_uncased_L-10_H-256_A-4<span class="w"> </span><span class="se">\</span>
@@ -158,7 +158,7 @@ tlt<span class="w"> </span><span class="nb">eval</span><span class="w"> </span><
 </div>
 </section>
 <section id="fine-tuning-using-a-dataset-from-the-tfds-catalog">
-<h2>Fine tuning using a dataset from the TFDS catalog<a class="headerlink" href="#fine-tuning-using-a-dataset-from-the-tfds-catalog" title="Permalink to this heading">¶</a></h2>
+<h2>Fine Tuning Using a Dataset from the TFDS Catalog<a class="headerlink" href="#fine-tuning-using-a-dataset-from-the-tfds-catalog" title="Permalink to this heading">¶</a></h2>
 <p>This example demonstrates using the Intel Transfer Learning Tool CLI to fine tune a text classification model using a
 dataset from the <a class="reference external" href="https://www.tensorflow.org/datasets/catalog/overview">TensorFlow Datasets (TFDS) catalog</a>.
 Intel Transfer Learning Tool supports the following text classification datasets from TFDS:
@@ -194,7 +194,7 @@ tlt<span class="w"> </span><span class="nb">eval</span><span class="w"> </span><
 </div>
 </section>
 <section id="distributed-transfer-learning-using-a-dataset-from-hugging-face">
-<h2>Distributed transfer learning using a dataset from Hugging Face<a class="headerlink" href="#distributed-transfer-learning-using-a-dataset-from-hugging-face" title="Permalink to this heading">¶</a></h2>
+<h2>Distributed Transfer Learning Using a Dataset from Hugging Face<a class="headerlink" href="#distributed-transfer-learning-using-a-dataset-from-hugging-face" title="Permalink to this heading">¶</a></h2>
 <p>This example runs a distributed PyTorch training job using the TLT CLI. It fine tunes a text classification model
 for document-level sentiment analysis using a dataset from the <a class="reference external" href="https://huggingface.co/datasets">Hugging Face catalog</a>.
 Intel Transfer Learning Tool supports the following text classification datasets from Hugging Face:</p>
