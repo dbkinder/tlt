@@ -10,7 +10,7 @@ Examples
    :hidden:
 
    cli/README
-   cli/image_classification.rst
-   cli/text_classification.rst
+   Image Classification CLI Example <cli/image_classification.rst>
+   Text Classification CLI Example <cli/text_classification.rst>
    ../notebooks/README
 
