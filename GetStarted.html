@@ -318,18 +318,12 @@ notebook environment.</p>
 <span class="c1"># Export the model</span>
 <span class="n">saved_model_dir</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">output_dir</span><span class="o">=</span><span class="n">output_dir</span><span class="p">)</span>
 
-<span class="c1"># Create an Intel Neural Compressor config file</span>
-<span class="n">inc_config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;inc_config.yaml&quot;</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">write_inc_config_file</span><span class="p">(</span><span class="n">inc_config_file</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">accuracy_criterion_relative</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">exit_policy_timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                            <span class="n">exit_policy_max_trials</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">tuning_workspace</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;nc_workspace&quot;</span><span class="p">))</span>
-
 <span class="c1"># Quantize the trained model</span>
 <span class="n">quantization_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;quantized_model&quot;</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">quantization_output</span><span class="p">,</span> <span class="n">inc_config_file</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">quantization_output</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
 
 <span class="c1"># Benchmark the trained model using the Intel Neural Compressor config file</span>
-<span class="n">model</span><span class="o">.</span><span class="n">benchmark</span><span class="p">(</span><span class="n">quantization_output</span><span class="p">,</span> <span class="n">inc_config_file</span><span class="p">,</span> <span class="s1">&#39;performance&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">benchmark</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">saved_model_dir</span><span class="o">=</span><span class="n">quantization_output</span><span class="p">)</span>
 
 <span class="c1"># Do graph optimization on the trained model</span>
 <span class="n">optimization_output</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;optimized_model&quot;</span><span class="p">)</span>

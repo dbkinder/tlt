@@ -277,7 +277,7 @@
         <span class="n">script_cmd</span> <span class="o">=</span> <span class="s1">&#39;python &#39;</span> <span class="o">+</span> <span class="n">distributed_vision_script</span>
         <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --use_case </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;image_classification&#39;</span><span class="p">)</span>
         <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --epochs </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
-        <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --saved_objects_dir </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">saved_objects_dir</span><span class="p">)</span>
+        <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --tlt_saved_objects_dir </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">saved_objects_dir</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
             <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --shuffle&#39;</span>
 
@@ -354,7 +354,11 @@
 
         <span class="k">if</span> <span class="n">distributed</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">saved_objects_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_for_distributed</span><span class="p">(</span><span class="s2">&quot;saved_objects&quot;</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">val_data</span><span class="p">)</span>
+                <span class="n">saved_objects_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_for_distributed</span><span class="p">(</span>
+                    <span class="n">export_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;tlt_saved_objects&quot;</span><span class="p">),</span>
+                    <span class="n">train_data</span><span class="o">=</span><span class="n">train_data</span><span class="p">,</span>
+                    <span class="n">val_data</span><span class="o">=</span><span class="n">val_data</span>
+                <span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_fit_distributed</span><span class="p">(</span><span class="n">saved_objects_dir</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">shuffle_files</span><span class="p">,</span> <span class="n">hostfile</span><span class="p">,</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">nproc_per_node</span><span class="p">,</span>
                                       <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;use_horovod&#39;</span><span class="p">))</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>

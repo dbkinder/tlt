@@ -285,11 +285,11 @@
         <span class="n">script_cmd</span> <span class="o">=</span> <span class="s1">&#39;python &#39;</span> <span class="o">+</span> <span class="n">distributed_vision_script</span>
         <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --use_case </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;text_classification&#39;</span><span class="p">)</span>
         <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --epochs </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
-        <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --saved_objects_dir </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">saved_objects_dir</span><span class="p">)</span>
+        <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --tlt_saved_objects_dir </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">saved_objects_dir</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
             <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --shuffle&#39;</span>
         <span class="k">if</span> <span class="n">hf_bert_tokenizer</span><span class="p">:</span>
-            <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --hf_bert_tokenizer </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hf_bert_tokenizer</span><span class="p">)</span>
+            <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --model_name </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hf_bert_tokenizer</span><span class="p">)</span>  <span class="c1"># model_name and hf_bert_tokenizer are the same</span>
         <span class="k">if</span> <span class="n">max_seq_length</span><span class="p">:</span>
             <span class="n">script_cmd</span> <span class="o">+=</span> <span class="s1">&#39; --max_seq_length </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_seq_length</span><span class="p">)</span>
 
@@ -358,7 +358,11 @@
 
         <span class="k">if</span> <span class="n">distributed</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">saved_objects_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_for_distributed</span><span class="p">(</span><span class="s2">&quot;saved_objects&quot;</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">val_data</span><span class="p">)</span>
+                <span class="n">saved_objects_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_for_distributed</span><span class="p">(</span>
+                    <span class="n">export_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;tlt_saved_objects&quot;</span><span class="p">),</span>
+                    <span class="n">train_data</span><span class="o">=</span><span class="n">train_data</span><span class="p">,</span>
+                    <span class="n">val_data</span><span class="o">=</span><span class="n">val_data</span>
+                <span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_fit_distributed</span><span class="p">(</span><span class="n">saved_objects_dir</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">shuffle_files</span><span class="p">,</span> <span class="n">hostfile</span><span class="p">,</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">nproc_per_node</span><span class="p">,</span>
                                       <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;use_horovod&#39;</span><span class="p">))</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
@@ -585,7 +589,7 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
             <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config_template</span><span class="p">,</span> <span class="n">config_file</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="TFTextClassificationModel.quantize"><a class="viewcode-back" href="../../../../_autosummary/tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel.quantize.html#tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel.quantize">[docs]</a>    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">inc_config_path</span><span class="p">):</span>
+<div class="viewcode-block" id="TFTextClassificationModel.quantize"><a class="viewcode-back" href="../../../../_autosummary/tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel.quantize.html#tlt.models.text_classification.tf_text_classification_model.TFTextClassificationModel.quantize">[docs]</a>    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">inc_config_path</span><span class="p">,</span> <span class="n">overwrite_model</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Performs post training quantization using the Intel Neural Compressor on the model</span>
 <span class="sd">        using the specified config file. The quantized model is written to the output directory.</span>
@@ -593,6 +597,8 @@
 <span class="sd">        Args:</span>
 <span class="sd">            output_dir (str): Writable output directory to save the quantized model</span>
 <span class="sd">            inc_config_path (str): Path to an Intel Neural Compressor config file (.yaml)</span>
+<span class="sd">            overwrite (bool): Specify whether or not to overwrite the output_dir, if it already exists</span>
+<span class="sd">                              (default: False)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
@@ -610,7 +616,7 @@
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Verify that the output directory doesn&#39;t already have a saved_model.pb file</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;saved_model.pb&quot;</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;saved_model.pb&quot;</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite_model</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="s2">&quot;A saved model already exists at:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;saved_model.pb&quot;</span><span class="p">))</span>
 
         <span class="kn">from</span> <span class="nn">neural_compressor.experimental</span> <span class="kn">import</span> <span class="n">Quantization</span>

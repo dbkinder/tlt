@@ -85,7 +85,7 @@
 <h1>tlt.models.image_classification.tf_image_classification_model.TFImageClassificationModel.quantize<a class="headerlink" href="#tlt-models-image-classification-tf-image-classification-model-tfimageclassificationmodel-quantize" title="Permalink to this heading">¶</a></h1>
 <dl class="py method">
 <dt class="sig sig-object py" id="tlt.models.image_classification.tf_image_classification_model.TFImageClassificationModel.quantize">
-<span class="sig-prename descclassname"><span class="pre">TFImageClassificationModel.</span></span><span class="sig-name descname"><span class="pre">quantize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tlt.models.image_classification.tf_image_classification_model.TFImageClassificationModel.quantize" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">TFImageClassificationModel.</span></span><span class="sig-name descname"><span class="pre">quantize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tlt.models.image_classification.tf_image_classification_model.TFImageClassificationModel.quantize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs post training quantization using the Intel Neural Compressor on the model using the dataset.
 The dataset’s training subset will be used as the calibration data and its validation or test subset will
 be used for evaluation. The quantized model is written to the output directory.</p>
@@ -95,6 +95,8 @@ be used for evaluation. The quantized model is written to the output directory.<
 <li><p><strong>output_dir</strong> (<em>str</em>) – Writable output directory to save the quantized model</p></li>
 <li><p><strong>dataset</strong> (<a class="reference internal" href="tlt.datasets.image_classification.image_classification_dataset.ImageClassificationDataset.html#tlt.datasets.image_classification.image_classification_dataset.ImageClassificationDataset" title="tlt.datasets.image_classification.image_classification_dataset.ImageClassificationDataset"><em>ImageClassificationDataset</em></a>) – dataset to quantize with</p></li>
 <li><p><strong>config</strong> (<em>PostTrainingQuantConfig</em>) – Optional, for customizing the quantization parameters</p></li>
+<li><p><strong>overwrite_model</strong> (<em>bool</em>) – Specify whether or not to overwrite the output_dir, if it already exists
+(default: False)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

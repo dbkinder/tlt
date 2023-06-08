@@ -134,13 +134,13 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_directory</span></code>(model_dir)</p></td>
 <td><p>Load a model from a directory</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir[, overwrite_model])</p></td>
 <td><p>Performs FP32 graph optimization using the Intel Neural Compressor on the model and writes the inference-optimized model to the output_dir.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(input_samples)</p></td>
 <td><p>Generates predictions for the input samples.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.image_classification.image_classification_model.ImageClassificationModel.quantize.html#tlt.models.image_classification.image_classification_model.ImageClassificationModel.quantize" title="tlt.models.image_classification.image_classification_model.ImageClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, dataset[, config])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.image_classification.image_classification_model.ImageClassificationModel.quantize.html#tlt.models.image_classification.image_classification_model.ImageClassificationModel.quantize" title="tlt.models.image_classification.image_classification_model.ImageClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, dataset[, config, ...])</p></td>
 <td><p>Performs post training quantization using the Intel Neural Compressor on the model using the dataset.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="tlt.models.image_classification.image_classification_model.ImageClassificationModel.train.html#tlt.models.image_classification.image_classification_model.ImageClassificationModel.train" title="tlt.models.image_classification.image_classification_model.ImageClassificationModel.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(dataset, output_dir[, epochs, ...])</p></td>

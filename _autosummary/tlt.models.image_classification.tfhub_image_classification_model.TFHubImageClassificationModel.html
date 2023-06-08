@@ -140,13 +140,13 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_directory</span></code>(model_dir)</p></td>
 <td><p>Loads a saved model from the specified directory</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir[, overwrite_model])</p></td>
 <td><p>Performs FP32 graph optimization using the Intel Neural Compressor on the model and writes the inference-optimized model to the output_dir.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(input_samples[, return_type, callbacks])</p></td>
 <td><p>Perform feed-forward inference and predict the classes of the input_samples.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, dataset[, config])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, dataset[, config, ...])</p></td>
 <td><p>Performs post training quantization using the Intel Neural Compressor on the model using the dataset.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_mixed_precision</span></code>(...)</p></td>

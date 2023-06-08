@@ -263,7 +263,11 @@
             <span class="n">train_callbacks</span> <span class="o">+=</span> <span class="n">callbacks</span>
 
         <span class="k">if</span> <span class="n">distributed</span><span class="p">:</span>
-            <span class="n">saved_objects_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_for_distributed</span><span class="p">(</span><span class="s2">&quot;saved_objects&quot;</span><span class="p">,</span> <span class="n">train_data</span><span class="p">,</span> <span class="n">val_data</span><span class="p">)</span>
+            <span class="n">saved_objects_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_for_distributed</span><span class="p">(</span>
+                <span class="n">export_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;tlt_saved_objects&quot;</span><span class="p">),</span>
+                <span class="n">train_data</span><span class="o">=</span><span class="n">train_data</span><span class="p">,</span>
+                <span class="n">val_data</span><span class="o">=</span><span class="n">val_data</span>
+            <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fit_distributed</span><span class="p">(</span><span class="n">saved_objects_dir</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">shuffle_files</span><span class="p">,</span> <span class="n">hostfile</span><span class="p">,</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">nproc_per_node</span><span class="p">,</span>
                                   <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;use_horovod&#39;</span><span class="p">))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_saved_objects_for_distributed</span><span class="p">()</span>

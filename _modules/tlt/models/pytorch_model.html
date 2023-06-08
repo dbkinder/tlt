@@ -190,7 +190,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">dill</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">model_copy</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">optimize_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">optimize_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">overwrite_model</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Performs FP32 graph optimization using the Intel Neural Compressor on the model</span>
 <span class="sd">        and writes the inference-optimized model to the output_dir. Graph optimization includes converting</span>
@@ -200,6 +200,8 @@
 <span class="sd">        Args:</span>
 <span class="sd">            saved_model_dir (str): Source directory for the model to optimize.</span>
 <span class="sd">            output_dir (str): Writable output directory to save the optimized model</span>
+<span class="sd">            overwrite_model (bool): Specify whether or not to overwrite the output_dir, if it already exists</span>
+<span class="sd">                              (default: False)</span>
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
 <span class="sd">        Raises:</span>
@@ -277,7 +279,7 @@
 
         <span class="k">return</span>
 
-    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">overwrite_model</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Performs post training quantization using the Intel Neural Compressor on the model using the dataset.</span>
 <span class="sd">        The dataset&#39;s training subset will be used as the calibration data and its validation or test subset will</span>
@@ -287,6 +289,8 @@
 <span class="sd">            output_dir (str): Writable output directory to save the quantized model</span>
 <span class="sd">            dataset (ImageClassificationDataset): dataset to quantize with</span>
 <span class="sd">            config (PostTrainingQuantConfig): Optional, for customizing the quantization parameters</span>
+<span class="sd">            overwrite_model (bool): Specify whether or not to overwrite the output_dir, if it already exists</span>
+<span class="sd">                              (default: False)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
@@ -301,7 +305,8 @@
             <span class="c1"># Verify that the output directory doesn&#39;t already have a model.pt or best_model.pt file</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;model.pt&quot;</span><span class="p">))</span> <span class="ow">or</span> \
                     <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;best_model.pt&quot;</span><span class="p">)):</span>
-                <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="s2">&quot;A saved model already exists in: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_dir</span><span class="p">))</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">overwrite_model</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="s2">&quot;A saved model already exists in: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output_dir</span><span class="p">))</span>
 
         <span class="c1"># Verify dataset is of the right type</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inc_compatible_dataset</span><span class="p">):</span>

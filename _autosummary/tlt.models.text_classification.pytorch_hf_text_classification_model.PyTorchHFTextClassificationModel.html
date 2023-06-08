@@ -144,13 +144,13 @@ fine tuning.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_directory</span></code>(model_dir, num_classes)</p></td>
 <td><p>Loads a saved pytorch model from the given model_dir directory</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir[, overwrite_model])</p></td>
 <td><p>Performs FP32 graph optimization using the Intel Neural Compressor on the model and writes the inference-optimized model to the output_dir.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(input_samples[, return_raw])</p></td>
 <td><p>Generates predictions for the specified input samples.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize" title="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, inc_config_path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize" title="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, inc_config_path[, ...])</p></td>
 <td><p>Performs post training quantization using the Intel Neural Compressor on the model using the specified config file.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.train.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.train" title="tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(dataset, output_dir[, epochs, ...])</p></td>
