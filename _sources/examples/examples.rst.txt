@@ -12,5 +12,5 @@ Examples
    cli/README
    Image Classification CLI Example <cli/image_classification.rst>
    Text Classification CLI Example <cli/text_classification.rst>
-   ../notebooks/README
+   Jupyter Notebook API Examples <../notebooks/README>
 
