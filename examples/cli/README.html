@@ -222,7 +222,7 @@ The <code class="docutils literal notranslate"><span class="pre">dataset-dir</sp
 </section>
 <section id="quantize-the-model">
 <h2>Quantize the Model<a class="headerlink" href="#quantize-the-model" title="Permalink to this heading">¶</a></h2>
-<p>Perform post-training quantization using the <a class="reference external" href="https://github.com/intel/neural-compressor">Intel® Neural
+<p>Perform post-training quantization using the <a class="reference external" href="https://intel.github.io/neural-compressor">Intel® Neural
 Compressor</a> using the <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">quantize</span></code>
 command. Make sure to specify your own file paths for <code class="docutils literal notranslate"><span class="pre">model-dir</span></code> (including the
 numbered folder), <code class="docutils literal notranslate"><span class="pre">dataset-dir</span></code>, and <code class="docutils literal notranslate"><span class="pre">output-dir</span></code>.  The quantized model will be
@@ -294,7 +294,7 @@ the performance of the full precision model to the quantized model.</p>
 </section>
 <section id="perform-graph-optimization-on-the-trained-model">
 <h2>Perform Graph Optimization on the Trained Model<a class="headerlink" href="#perform-graph-optimization-on-the-trained-model" title="Permalink to this heading">¶</a></h2>
-<p>Alternatively, the <a class="reference external" href="https://github.com/intel/neural-compressor">Intel Neural Compressor</a> can be used to optimize
+<p>Alternatively, the <a class="reference external" href="https://intel.github.io/neural-compressor">Intel Neural Compressor</a> can be used to optimize
 the full precision graph. Make sure to specify your own file paths for <code class="docutils literal notranslate"><span class="pre">model-dir</span></code> and <code class="docutils literal notranslate"><span class="pre">output-dir</span></code>.
 Note that graph optimization is also done as part of the quantization flow, so there is no need to call
 <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">optimize</span></code> on a quantized model.</p>
