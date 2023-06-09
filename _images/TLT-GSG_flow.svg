@@ -2,7 +2,7 @@
   <style>
     @import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
     text {
-      font-family: Roboto;
+      font-family: Roboto, Arial, Helvetica, sans-serif;
       font-weight:400;
       font-size: 14px;
       fill: #fff;
@@ -17,6 +17,7 @@
     .st3{fill:#0068b5}
     .st7{ font-size:12px }
   </style>
+  <rect width="100%" height="100%" fill="white"/>
   <line x1="368" x2="368" y2="200" class="st0"/>
   <line x1="176" x2="176" y2="200" class="st0"/>
   <line x2="560" y1="100" y2="100" class="st1"/>
