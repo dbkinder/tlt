@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.get_inc_config &mdash; Intel® Transfer Learning Tool 0.2.0 documentation</title>
+  <title>tlt.models.image_classification.keras_image_classification_model.KerasImageClassificationModel.optimize_graph &mdash; Intel® Transfer Learning Tool 0.2.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/tlt-custom.css" type="text/css" />
@@ -71,9 +71,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.get_inc_config</li>
+      <li class="breadcrumb-item active">tlt.models.image_classification.keras_image_classification_model.KerasImageClassificationModel.optimize_graph</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/_autosummary/tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.get_inc_config.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/_autosummary/tlt.models.image_classification.keras_image_classification_model.KerasImageClassificationModel.optimize_graph.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -81,25 +81,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="tlt-models-image-classification-tfhub-image-classification-model-tfhubimageclassificationmodel-get-inc-config">
-<h1>tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.get_inc_config<a class="headerlink" href="#tlt-models-image-classification-tfhub-image-classification-model-tfhubimageclassificationmodel-get-inc-config" title="Permalink to this heading">¶</a></h1>
+  <section id="tlt-models-image-classification-keras-image-classification-model-kerasimageclassificationmodel-optimize-graph">
+<h1>tlt.models.image_classification.keras_image_classification_model.KerasImageClassificationModel.optimize_graph<a class="headerlink" href="#tlt-models-image-classification-keras-image-classification-model-kerasimageclassificationmodel-optimize-graph" title="Permalink to this heading">¶</a></h1>
 <dl class="py method">
-<dt class="sig sig-object py" id="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.get_inc_config">
-<span class="sig-prename descclassname"><span class="pre">TFHubImageClassificationModel.</span></span><span class="sig-name descname"><span class="pre">get_inc_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">accuracy_criterion_relative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_policy_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_policy_max_trials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.get_inc_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates an INC post-training quantization config from the specified parameters.</p>
+<dt class="sig sig-object py" id="tlt.models.image_classification.keras_image_classification_model.KerasImageClassificationModel.optimize_graph">
+<span class="sig-prename descclassname"><span class="pre">KerasImageClassificationModel.</span></span><span class="sig-name descname"><span class="pre">optimize_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite_model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tlt.models.image_classification.keras_image_classification_model.KerasImageClassificationModel.optimize_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs FP32 graph optimization using the Intel Neural Compressor on the model
+and writes the inference-optimized model to the output_dir. Graph optimization includes converting
+variables to constants, removing training-only operations like checkpoint saving, stripping out parts
+of the graph that are never reached, removing debug operations like CheckNumerics, folding batch
+normalization ops into the pre-calculated weights, and fusing common operations into unified versions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>accuracy_criterion_relative</strong> (<em>float</em>) – Relative accuracy loss (default: 0.01, which is 1%)</p></li>
-<li><p><strong>exit_policy_timeout</strong> (<em>int</em>) – Tuning timeout in seconds (default: 0). Tuning processing finishes when the
-timeout or max_trials is reached. A tuning timeout of 0 means that the tuning
-phase stops when the accuracy criterion is met.</p></li>
-<li><p><strong>exit_policy_max_trials</strong> (<em>int</em>) – Maximum number of tuning trials (default: 50). Tuning processing finishes when
-the timeout or or max_trials is reached.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em>) – Writable output directory to save the optimized model</p></li>
+<li><p><strong>overwrite_model</strong> (<em>bool</em>) – Specify whether or not to overwrite the output_dir, if it already exists
+(default: False)</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><strong>ValueError</strong> – if the parameters are not within the expected values</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>FileExistsError</strong> – if the output_dir already has a saved_model.pb file</p>
 </dd>
 </dl>
 </dd></dl>
@@ -115,7 +119,7 @@ the timeout or or max_trials is reached.</p></li>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

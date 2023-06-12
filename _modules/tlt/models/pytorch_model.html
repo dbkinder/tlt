@@ -114,6 +114,7 @@
 <span class="kn">from</span> <span class="nn">tlt.models.model</span> <span class="kn">import</span> <span class="n">BaseModel</span>
 <span class="kn">from</span> <span class="nn">tlt.utils.types</span> <span class="kn">import</span> <span class="n">FrameworkType</span><span class="p">,</span> <span class="n">UseCaseType</span>
 <span class="kn">from</span> <span class="nn">tlt.utils.file_utils</span> <span class="kn">import</span> <span class="n">verify_directory</span>
+<span class="kn">from</span> <span class="nn">tlt.utils.inc_utils</span> <span class="kn">import</span> <span class="n">get_inc_config</span>
 
 
 <div class="viewcode-block" id="PyTorchModel"><a class="viewcode-back" href="../../../_autosummary/tlt.models.pytorch_model.PyTorchModel.html#tlt.models.pytorch_model.PyTorchModel">[docs]</a><span class="k">class</span> <span class="nc">PyTorchModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
@@ -198,12 +199,13 @@
 <span class="sd">        of the graph that are never reached, removing debug operations like CheckNumerics, folding batch</span>
 <span class="sd">        normalization ops into the pre-calculated weights, and fusing common operations into unified versions.</span>
 <span class="sd">        Args:</span>
-<span class="sd">            saved_model_dir (str): Source directory for the model to optimize.</span>
 <span class="sd">            output_dir (str): Writable output directory to save the optimized model</span>
 <span class="sd">            overwrite_model (bool): Specify whether or not to overwrite the output_dir, if it already exists</span>
-<span class="sd">                              (default: False)</span>
+<span class="sd">                                    (default: False)</span>
+
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
+
 <span class="sd">        Raises:</span>
 <span class="sd">            NotImplementedError: because this hasn&#39;t been implemented yet for PyTorch</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -290,7 +292,7 @@
 <span class="sd">            dataset (ImageClassificationDataset): dataset to quantize with</span>
 <span class="sd">            config (PostTrainingQuantConfig): Optional, for customizing the quantization parameters</span>
 <span class="sd">            overwrite_model (bool): Specify whether or not to overwrite the output_dir, if it already exists</span>
-<span class="sd">                              (default: False)</span>
+<span class="sd">                                    (default: False)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
@@ -313,9 +315,10 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Quantization is compatible with datasets of type </span><span class="si">{}</span><span class="s1">, and type &#39;</span>
                              <span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> was found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inc_compatible_dataset</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">dataset</span><span class="p">)))</span>
 
-        <span class="n">config</span> <span class="o">=</span> <span class="n">config</span> <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_inc_config</span><span class="p">()</span>
-        <span class="n">config</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="s1">&#39;ipex&#39;</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">config</span> <span class="k">if</span> <span class="n">config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">get_inc_config</span><span class="p">(</span><span class="n">approach</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_quantization_approach</span><span class="p">)</span>
+
         <span class="n">calib_dataloader</span><span class="p">,</span> <span class="n">eval_dataloader</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get_inc_dataloaders</span><span class="p">()</span>
+        <span class="n">config</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="s1">&#39;ipex&#39;</span>
         <span class="n">quantized_model</span> <span class="o">=</span> <span class="n">quantization</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">,</span> <span class="n">conf</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">calib_dataloader</span><span class="o">=</span><span class="n">calib_dataloader</span><span class="p">,</span>
                                            <span class="n">eval_dataloader</span><span class="o">=</span><span class="n">eval_dataloader</span><span class="p">)</span>
 
@@ -374,6 +377,7 @@
         <span class="n">config</span> <span class="o">=</span> <span class="n">BenchmarkConfig</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">&quot;ipex&quot;</span><span class="p">,</span> <span class="n">warmup</span><span class="o">=</span><span class="n">warmup</span><span class="p">,</span> <span class="n">iteration</span><span class="o">=</span><span class="n">iteration</span><span class="p">,</span>
                                  <span class="n">cores_per_instance</span><span class="o">=</span><span class="n">cores_per_instance</span><span class="p">,</span> <span class="n">num_of_instance</span><span class="o">=</span><span class="n">num_of_instance</span><span class="p">,</span>
                                  <span class="n">inter_num_of_threads</span><span class="o">=</span><span class="n">inter_num_of_threads</span><span class="p">,</span> <span class="n">intra_num_of_threads</span><span class="o">=</span><span class="n">intra_num_of_threads</span><span class="p">)</span>
+
         <span class="n">_</span><span class="p">,</span> <span class="n">eval_dataloader</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">get_inc_dataloaders</span><span class="p">()</span>
 
         <span class="kn">from</span> <span class="nn">neural_compressor.benchmark</span> <span class="kn">import</span> <span class="n">fit</span>
@@ -395,7 +399,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

@@ -15,11 +15,11 @@
    
       ~TorchvisionImageClassificationModel.__init__
       ~TorchvisionImageClassificationModel.benchmark
+      ~TorchvisionImageClassificationModel.cleanup_saved_objects_for_distributed
       ~TorchvisionImageClassificationModel.evaluate
       ~TorchvisionImageClassificationModel.export
       ~TorchvisionImageClassificationModel.export_for_distributed
       ~TorchvisionImageClassificationModel.freeze_layer
-      ~TorchvisionImageClassificationModel.get_inc_config
       ~TorchvisionImageClassificationModel.list_layers
       ~TorchvisionImageClassificationModel.load_from_directory
       ~TorchvisionImageClassificationModel.optimize_graph

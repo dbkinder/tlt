@@ -94,8 +94,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">intel_extension_for_pytorch</span> <span class="k">as</span> <span class="nn">ipex</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
@@ -138,7 +137,7 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;bert-base-cased&quot;</span>
 <span class="n">framework</span> <span class="o">=</span> <span class="s2">&quot;pytorch&quot;</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">model_factory</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">framework</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model_factory</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">framework</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model name:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">model_name</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Framework:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">framework</span><span class="p">)</span>
@@ -159,8 +158,8 @@
 </pre></div>
 </div>
 <p>If the .csv has more columns, the <code class="docutils literal notranslate"><span class="pre">select_cols</span></code> or <code class="docutils literal notranslate"><span class="pre">exclude_cols</span></code> parameters can be used to filter out which columns are parsed.</p>
-<p>This example is downloading the <a class="reference external" href="https://archive-beta.ics.uci.edu/ml/datasets/sms+spam+collection">SMS Spam Collection</a> dataset, which has a tab separated value file in the .zip file. This dataset has labeled SMS text messages that are either being classified as <code class="docutils literal notranslate"><span class="pre">ham</span></code> or <code class="docutils literal notranslate"><span class="pre">spam</span></code>. The first column in the data file has the label (<code class="docutils literal notranslate"><span class="pre">ham</span></code> or <code class="docutils literal notranslate"><span class="pre">spam</span></code>) and the second column is the text of the SMS mesage. (Note: Please see this dataset’s applicable license for terms and conditions. Intel
-Corporation does not own the rights to this data set and does not confer any rights to it.)</p>
+<p>This example is downloading the <a class="reference external" href="https://archive.ics.uci.edu/ml/datasets/sms+spam+collection">SMS Spam Collection</a> dataset, which has a tab separated value file in the .zip file. This dataset has labeled SMS text messages that are either being classified as <code class="docutils literal notranslate"><span class="pre">ham</span></code> or <code class="docutils literal notranslate"><span class="pre">spam</span></code>. The first column in the data file has the label (<code class="docutils literal notranslate"><span class="pre">ham</span></code> or <code class="docutils literal notranslate"><span class="pre">spam</span></code>) and the second column is the text of the SMS mesage. (Note: Please see this dataset’s applicable license for terms and conditions. Intel Corporation
+does not own the rights to this data set and does not confer any rights to it.)</p>
 <p>When using your own dataset, update the path to your dataset directory, as well the other variables with properties about the dataset like the csv file name, class names, delimiter, header, and the map function (if string labels need to be translated into numerical values).</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -168,7 +167,7 @@ Corporation does not own the rights to this data set and does not confer any rig
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Modify the variables below to use a different dataset or a csv file on your local system.</span>
 <span class="c1"># The csv_path variable should be pointing to a csv file with 2 columns (the label and the text)</span>
-<span class="n">dataset_url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip&quot;</span>
+<span class="n">dataset_url</span> <span class="o">=</span> <span class="s2">&quot;https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip&quot;</span>
 <span class="n">dataset_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_dir</span><span class="p">,</span> <span class="s2">&quot;sms_spam_collection&quot;</span><span class="p">)</span>
 <span class="n">csv_name</span> <span class="o">=</span> <span class="s2">&quot;SMSSpamCollection&quot;</span>
 <span class="n">delimiter</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span>
@@ -206,9 +205,6 @@ Corporation does not own the rights to this data set and does not confer any rig
 <section id="Option-B:-Use-the-HuggingFace-catalog">
 <h3>Option B: Use the HuggingFace catalog<a class="headerlink" href="#Option-B:-Use-the-HuggingFace-catalog" title="Permalink to this heading">¶</a></h3>
 <p>Option B allows for using a dataset from the <a class="reference external" href="https://huggingface.co/datasets">HuggingFace datasets catalog</a>. Current supported datasets: - <strong>imdb</strong> - <strong>tweet_eval/</strong> – emoji, emotion, hate, irony, offensive, sentiment, stance_abortion, stance_atheism, stance_climate, stance_feminist, stance_hillary - <strong>rotten_tomatoes</strong> - <strong>ag_news</strong> - <strong>sst2</strong></p>
-<blockquote>
-<div><p>Note that quantization is not supported when using datasets from the HuggingFace Datasets catalog. If you would like to do <a class="reference external" href="#8.-Quantization">quantization in step 8</a>, use <a class="reference external" href="#Option-A:-Use-your-own-dataset">Option A to load a dataset from disk</a> instead of Option B.</p>
-</div></blockquote>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
@@ -241,8 +237,7 @@ Corporation does not own the rights to this data set and does not confer any rig
 <section id="5.-Fine-tuning">
 <h2>5. Fine tuning<a class="headerlink" href="#5.-Fine-tuning" title="Permalink to this heading">¶</a></h2>
 <p>The Intel Transfer Learning Tool model’s train function is called with the dataset that was just prepared, along with an output directory for checkpoints, and the number of training epochs.</p>
-<p>Mixed precision uses both 16-bit and 32-bit floating point types to make training run faster and use less memory. It is recommended to enable auto mixed precision training when running on platforms that support bfloat16 (Intel third or fourth generation Xeon processors). If it is enabled on a platform that does not support bfloat16, it can be detrimental to the training performance.</p>
-<p>With the do_eval paramter set to True by default, this step will also show how the model can be evaluated. The model’s evaluate function returns a list of metrics calculated from the dataset’s validation subset.</p>
+<p>With the do_eval parameter set to True by default, this step will also show how the model can be evaluated. The model’s evaluate function returns a list of metrics calculated from the dataset’s validation subset.</p>
 <section id="Arguments">
 <h3>Arguments<a class="headerlink" href="#Arguments" title="Permalink to this heading">¶</a></h3>
 <section id="Required">
@@ -267,7 +262,7 @@ Corporation does not own the rights to this data set and does not confer any rig
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ipex_optimize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">use_trainer</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ipex_optimize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_trainer</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -326,9 +321,8 @@ Corporation does not own the rights to this data set and does not confer any rig
 </pre></div>
 </div>
 </div>
-</section>
 <section id="Predict-on-Text">
-<h2>Predict on Text<a class="headerlink" href="#Predict-on-Text" title="Permalink to this heading">¶</a></h2>
+<h3>Predict on Text<a class="headerlink" href="#Predict-on-Text" title="Permalink to this heading">¶</a></h3>
 <p>Raw text can also be passed to the predict function.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
@@ -341,6 +335,7 @@ Corporation does not own the rights to this data set and does not confer any rig
 </pre></div>
 </div>
 </div>
+</section>
 </section>
 <section id="7.-Export-the-saved-model">
 <h2>7. Export the saved model<a class="headerlink" href="#7.-Export-the-saved-model" title="Permalink to this heading">¶</a></h2>
@@ -356,50 +351,56 @@ Corporation does not own the rights to this data set and does not confer any rig
 </section>
 <section id="8.-Quantization">
 <h2>8. Quantization<a class="headerlink" href="#8.-Quantization" title="Permalink to this heading">¶</a></h2>
-<p>In this section, the Intel Transfer Learning Tool API uses Intel® Neural Compressor (INC) to quantize the model to get optimal inference performance. Note that this feature has only been implemented for use with custom text classification datasets. If you used a dataset from the Huggingface dataset catalog, this will not work.</p>
-<p>First, we create a config file to use with Intel Neural Compressor based on your model, dataset, and other quantization parameters. If you want more control over the configuration, you can provide your own custom yaml path for the inc_config_file instead of using the file generated by write_inc_config_file().</p>
+<p>In this section, the Intel Transfer Learning Tool API uses Intel® Neural Compressor (INC) to quantize the model to get optimal inference performance.</p>
+<p>We use the Intel Neural Compressor config to benchmark the full precision model to see how it performs, as our baseline.</p>
+<blockquote>
+<div><p>Note that there is a known issue when running Intel Neural Compressor from a notebook that you may sometimes see the error <code class="docutils literal notranslate"><span class="pre">zmq.error.ZMQError:</span> <span class="pre">Address</span> <span class="pre">already</span> <span class="pre">in</span> <span class="pre">use</span></code>. If you see this error, rerun the cell again.</p>
+</div></blockquote>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">yaml</span>
-<span class="c1"># Create an output directory for quantization output with the same base name as our saved model directory</span>
-<span class="n">quantization_output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;quantized_models&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
-                                       <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">saved_model_dir</span><span class="p">))</span>
-
-<span class="c1"># Create a tuning workspace directory for INC</span>
-<span class="n">nc_workspace</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;nc_workspace&#39;</span><span class="p">)</span>
-
-<span class="c1"># Relative accuracy loss (1%)</span>
-<span class="n">relative_accuracy_criterion</span> <span class="o">=</span> <span class="mf">0.01</span>
-
-<span class="c1"># Define the exit policy timeout (in seconds) and max number of trials. The tuning processing finishes when</span>
-<span class="c1"># the timeout or max trials is reached. A tuning timeout of 0 means that the tuning phase stops when the</span>
-<span class="c1"># accuracy criterion is met.</span>
-<span class="n">timeout</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">max_trials</span><span class="o">=</span><span class="mi">15</span>
-
-<span class="c1"># Write an Intel Neural Compressor config file based on the dataset that we are using</span>
-<span class="n">inc_config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;inc_configs&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">saved_model_dir</span><span class="p">),</span>
-                               <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.yaml&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">model_name</span><span class="p">))</span>
-<span class="n">model</span><span class="o">.</span><span class="n">write_inc_config_file</span><span class="p">(</span><span class="n">inc_config_file</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">accuracy_criterion_relative</span><span class="o">=</span><span class="n">relative_accuracy_criterion</span><span class="p">,</span> <span class="n">exit_policy_timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
-                            <span class="n">exit_policy_max_trials</span><span class="o">=</span><span class="n">max_trials</span><span class="p">,</span> <span class="n">tuning_workspace</span><span class="o">=</span><span class="n">nc_workspace</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">inc_config_file</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;INC config file has been written to: </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inc_config_file</span><span class="p">))</span>
-    <span class="c1"># Print configs for informational purposes</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">inc_config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">benchmark</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<p>Next we use Intel Neural Compressor to automatically search for the optimal quantization recipe for low-precision model inference. Running post training quantization may take several minutes.</p>
 <p>Next we use INC to automatically search for the optimal quantization recipe for low-precision model inference within the accuracy loss constrains defined in the config. Running post training quantization may take several minutes, depending on your hardware and the exit policy (timeout and max trials).</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">quantization_output_dir</span><span class="p">,</span> <span class="n">inc_config_file</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inc_output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;quantized_models&#39;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
+                                       <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">saved_model_dir</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">inc_output_dir</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s benchmark using the quantized model, so that we can compare the performance to the full precision model that was originally benchmarked.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quantized_result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">benchmark</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span> <span class="n">saved_model_dir</span><span class="o">=</span><span class="n">inc_output_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>You can inspect the disk size of the pre- and post-quantization model files:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The size of the un-compressed model:&#39;</span><span class="p">)</span>
+<span class="o">!</span>du<span class="w"> </span>-h<span class="w"> </span><span class="o">{</span>saved_model_dir<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The size of the compressed model:&#39;</span><span class="p">)</span>
+<span class="o">!</span>du<span class="w"> </span>-h<span class="w"> </span><span class="o">{</span>inc_output_dir<span class="o">}</span>
 </pre></div>
 </div>
 </div>
@@ -447,7 +448,7 @@ Corporation does not own the rights to this data set and does not confer any rig
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

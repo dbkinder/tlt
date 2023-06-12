@@ -126,26 +126,6 @@
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-tlt-benchmark-inc-config">
-<span class="sig-name descname"><span class="pre">--inc-config</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--inc_config</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;inc_config&gt;</span></span><a class="headerlink" href="#cmdoption-tlt-benchmark-inc-config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Path to a config file (yaml) that will be used to benchmark the model using the Intel Neural Compressor. The INC benchmarking documentation can be found at: <a class="reference external" href="https://github.com/intel/neural-compressor/blob/master/docs/benchmark.md">https://github.com/intel/neural-compressor/blob/master/docs/benchmark.md</a> If no INC config file is provided, a default config file will be generated.</p>
-</dd></dl>
-
-<dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-tlt-benchmark-mode">
-<span class="sig-name descname"><span class="pre">--mode</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;mode&gt;</span></span><a class="headerlink" href="#cmdoption-tlt-benchmark-mode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specify to benchmark the model’s performance or accuracy</p>
-<dl class="field-list simple">
-<dt class="field-odd">Default</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">performance</span></code></p>
-</dd>
-<dt class="field-even">Options</dt>
-<dd class="field-even"><p>performance | accuracy</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-tlt-benchmark-batch-size">
 <span class="sig-name descname"><span class="pre">--batch-size</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--batch_size</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;batch_size&gt;</span></span><a class="headerlink" href="#cmdoption-tlt-benchmark-batch-size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Batch size used for benchmarking, if an INC config file is not provided. If an INC config file is provided, the batch size from the config file will be used.</p>
@@ -311,18 +291,26 @@
 </dd></dl>
 
 <dl class="std option">
-<dt class="sig sig-object std" id="cmdoption-tlt-quantize-inc-config">
-<span class="sig-name descname"><span class="pre">--inc-config</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--inc_config</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;inc_config&gt;</span></span><a class="headerlink" href="#cmdoption-tlt-quantize-inc-config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Path to a config file (yaml) that will be used to quantize the model using the Intel Neural Compressor. The config examples for quantization can be found at the Intel Neural Compressor GitHub repo (<a class="reference external" href="https://github.com/intel/neural-compressor/tree/master/examples">https://github.com/intel/neural-compressor/tree/master/examples</a>). If no INC config file is provided, a default config file will be generated.</p>
-</dd></dl>
-
-<dl class="std option">
 <dt class="sig sig-object std" id="cmdoption-tlt-quantize-batch-size">
 <span class="sig-name descname"><span class="pre">--batch-size</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--batch_size</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;batch_size&gt;</span></span><a class="headerlink" href="#cmdoption-tlt-quantize-batch-size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Batch size used during quantization, if an INC config file is not provided. If an INC config file is provided, the batch size from the config file will be used.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Default</dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">32</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-tlt-quantize-approach">
+<span class="sig-name descname"><span class="pre">--approach</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;approach&gt;</span></span><a class="headerlink" href="#cmdoption-tlt-quantize-approach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specify to use static or dynamic quantization. Generally, static is recommended for image models and dynamic is recommended for text models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">static</span></code></p>
+</dd>
+<dt class="field-even">Options</dt>
+<dd class="field-even"><p>static | dynamic</p>
 </dd>
 </dl>
 </dd></dl>
@@ -525,7 +513,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

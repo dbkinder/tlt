@@ -107,7 +107,9 @@
 <span class="kn">from</span> <span class="nn">tlt</span> <span class="kn">import</span> <span class="n">TLT_BASE_DIR</span>
 <span class="kn">from</span> <span class="nn">tlt.datasets.tf_dataset</span> <span class="kn">import</span> <span class="n">TFDataset</span>
 <span class="kn">from</span> <span class="nn">tlt.datasets.text_classification.text_classification_dataset</span> <span class="kn">import</span> <span class="n">TextClassificationDataset</span>
+<span class="kn">from</span> <span class="nn">tlt.utils.dataset_utils</span> <span class="kn">import</span> <span class="n">prepare_huggingface_input_data</span>
 <span class="kn">from</span> <span class="nn">tlt.utils.file_utils</span> <span class="kn">import</span> <span class="n">read_json_file</span>
+<span class="kn">from</span> <span class="nn">tlt.utils.inc_utils</span> <span class="kn">import</span> <span class="n">INCTFDataLoader</span>
 <span class="kn">from</span> <span class="nn">downloader.datasets</span> <span class="kn">import</span> <span class="n">DataDownloader</span>
 
 <span class="n">DATASET_CONFIG_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TLT_BASE_DIR</span><span class="p">,</span> <span class="s2">&quot;datasets/configs&quot;</span><span class="p">)</span>
@@ -205,7 +207,22 @@
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subset</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">())</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subset</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">batch_size</span><span class="p">))</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subset</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subset</span><span class="p">)</span><span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">AUTOTUNE</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_preprocessed</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="n">batch_size</span><span class="p">}</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_preprocessed</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;batch_size&#39;</span><span class="p">:</span> <span class="n">batch_size</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">get_inc_dataloaders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hub_name</span><span class="p">,</span> <span class="n">max_seq_length</span><span class="p">):</span>
+        <span class="n">calib_data</span><span class="p">,</span> <span class="n">calib_labels</span> <span class="o">=</span> <span class="n">prepare_huggingface_input_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">train_subset</span><span class="p">,</span> <span class="n">hub_name</span><span class="p">,</span> <span class="n">max_seq_length</span><span class="p">)</span>
+        <span class="n">calib_data</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">calib_labels</span><span class="p">)</span>
+
+        <span class="n">eval_data</span><span class="p">,</span> <span class="n">eval_labels</span> <span class="o">=</span> <span class="n">prepare_huggingface_input_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validation_subset</span><span class="p">,</span> <span class="n">hub_name</span><span class="p">,</span> <span class="n">max_seq_length</span><span class="p">)</span>
+        <span class="n">eval_data</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">(</span><span class="n">eval_labels</span><span class="p">)</span>
+
+        <span class="n">calib_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;token_type_ids&#39;</span><span class="p">)</span>
+        <span class="n">eval_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;token_type_ids&#39;</span><span class="p">)</span>
+
+        <span class="n">calib_dataloader</span> <span class="o">=</span> <span class="n">INCTFDataLoader</span><span class="p">(</span><span class="n">calib_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_preprocessed</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">])</span>
+        <span class="n">eval_dataloader</span> <span class="o">=</span> <span class="n">INCTFDataLoader</span><span class="p">(</span><span class="n">eval_data</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_preprocessed</span><span class="p">[</span><span class="s1">&#39;batch_size&#39;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">calib_dataloader</span><span class="p">,</span> <span class="n">eval_dataloader</span></div>
 </pre></div>
 
            </div>
@@ -216,7 +233,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

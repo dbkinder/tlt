@@ -105,6 +105,8 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">dill</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -112,7 +114,6 @@
 <span class="kn">from</span> <span class="nn">requests.adapters</span> <span class="kn">import</span> <span class="n">ProxyError</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
 <span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
-<span class="kn">import</span> <span class="nn">yaml</span>
 
 <span class="c1"># Hugging Face imports</span>
 <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span>
@@ -167,6 +168,9 @@
                                          <span class="bp">self</span><span class="o">.</span><span class="n">_dropout_layer_rate</span><span class="p">)</span>
         <span class="n">HFModel</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">FrameworkType</span><span class="o">.</span><span class="n">PYTORCH</span><span class="p">,</span> <span class="n">UseCaseType</span><span class="o">.</span><span class="n">TEXT_CLASSIFICATION</span><span class="p">)</span>
 
+        <span class="c1"># Store the dataset type that this model type can use for Intel Neural Compressor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inc_compatible_dataset</span> <span class="o">=</span> <span class="p">(</span><span class="n">HFCustomTextClassificationDataset</span><span class="p">,</span> <span class="n">HFTextClassificationDataset</span><span class="p">)</span>
+
         <span class="c1"># set up the configurable optimizer and loss functions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_optimizer_loss</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer_class</span> <span class="o">=</span> <span class="n">optimizer</span> <span class="k">if</span> <span class="n">optimizer</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">AdamW</span>
@@ -184,29 +188,39 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_trainer</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_history</span> <span class="o">=</span> <span class="kc">None</span></div>
 
-    <span class="k">def</span> <span class="nf">export_for_distributed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">dataset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">export_for_distributed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">export_dir</span><span class="p">,</span> <span class="n">train_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">val_data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Helper function to export dataset and model objects to disk for distributed job</span>
+<span class="sd">        Exports the model, optimizer, loss, train data and validation data to the export_dir for distributed</span>
+<span class="sd">        script to access. Note that the export_dir must be accessible to all the nodes. For example: NFS shared</span>
+<span class="sd">        systems. Note that the export_dir is created using mkdtemp which reults in a unique dir name. For</span>
+<span class="sd">        example: &quot;&lt;export_dir_Am83Iw&quot;. If the export_dir is None, the default name is &quot;saved_objects&quot;</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            output_dir (str): Path to a directory where the dataset and model objects are saved.</span>
-<span class="sd">                Default file name for saving the objects is &quot;hf_saved_objects.obj&quot;</span>
-<span class="sd">            dataset (HFTextClassificationDataset): Dataset object to save. It must be an object of</span>
-<span class="sd">                HFTextClassificationDataset so that the dataset info, train, test, and validation</span>
-<span class="sd">                subsets can be accessed.</span>
+<span class="sd">            export_dir (str): Directory name to export the model, optimizer, loss, train data and validation</span>
+<span class="sd">                data. export_dir must be accessible to all the nodes. For example: NFS shared systems. export_dir</span>
+<span class="sd">                is created using mkdtemp which reults in a unique dir name. For example: &quot;&lt;export_dir_Am83Iw&quot;.</span>
+<span class="sd">                If the export_dir is None, the default name is &quot;saved_objects&quot;</span>
+<span class="sd">            train_data (PyTorchDataset): Train dataset</span>
+<span class="sd">            val_data (PyTorchDataset): Validation dataset</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">temp_dir_prefix</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;HOME&#39;</span><span class="p">],</span> <span class="s2">&quot;saved_objects_&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">export_dir</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">export_dir</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_temp_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="n">temp_dir_prefix</span><span class="p">)</span>
 
         <span class="n">objects_to_save</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="n">dataset</span><span class="o">.</span><span class="n">dataset</span><span class="p">,</span>
-            <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="n">dataset</span><span class="o">.</span><span class="n">info</span><span class="p">,</span>
-            <span class="s2">&quot;train_subset&quot;</span><span class="p">:</span> <span class="n">dataset</span><span class="o">.</span><span class="n">train_subset</span><span class="p">,</span>
-            <span class="s2">&quot;test_subset&quot;</span><span class="p">:</span> <span class="n">dataset</span><span class="o">.</span><span class="n">test_subset</span><span class="p">,</span>
-            <span class="s2">&quot;validation_subset&quot;</span><span class="p">:</span> <span class="n">dataset</span><span class="o">.</span><span class="n">validation_subset</span><span class="p">,</span>
+            <span class="s2">&quot;train_data&quot;</span><span class="p">:</span> <span class="n">train_data</span><span class="p">,</span>
             <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">,</span>
             <span class="s2">&quot;optimizer&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="p">,</span>
             <span class="s2">&quot;loss&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss</span>
         <span class="p">}</span>
-        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">objects_to_save</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;hf_saved_objects.obj&quot;</span><span class="p">))</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">objects_to_save</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_temp_dir</span><span class="p">,</span> <span class="s2">&quot;torch_saved_objects.obj&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_temp_dir</span>
+
+    <span class="k">def</span> <span class="nf">cleanup_saved_objects_for_distributed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cleaning saved objects...&#39;</span><span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_temp_dir</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">ose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error while cleaning the saved objects: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ose</span><span class="p">))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">num_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -355,7 +369,7 @@
                     <span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="n">train_epoch_loss</span><span class="p">,</span>
                 <span class="p">},</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">checkpoint_dir</span><span class="p">,</span> <span class="s1">&#39;checkpoint.pt&#39;</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_fit_distributed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hostfile</span><span class="p">,</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">nproc_per_node</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">ipex_optimize</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_fit_distributed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">saved_objects_dir</span><span class="p">,</span> <span class="n">hostfile</span><span class="p">,</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">nproc_per_node</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">ipex_optimize</span><span class="p">):</span>
         <span class="n">distributed_text_script</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">TLT_DISTRIBUTED_DIR</span><span class="p">,</span> <span class="s2">&quot;pytorch&quot;</span><span class="p">,</span> <span class="s2">&quot;run_train_pyt.py&quot;</span><span class="p">)</span>
 
         <span class="n">default_port</span> <span class="o">=</span> <span class="s1">&#39;29500&#39;</span>
@@ -397,6 +411,7 @@
         <span class="n">bash_command</span> <span class="o">+=</span> <span class="s1">&#39; --master_addr </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">default_master_addr</span><span class="p">)</span>
         <span class="n">bash_command</span> <span class="o">+=</span> <span class="s1">&#39; --master_port </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">default_port</span><span class="p">)</span>
         <span class="n">bash_command</span> <span class="o">+=</span> <span class="s1">&#39; --backend </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;ccl&#39;</span><span class="p">)</span>
+        <span class="n">bash_command</span> <span class="o">+=</span> <span class="s1">&#39; --tlt_saved_objects_dir </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">saved_objects_dir</span><span class="p">)</span>
         <span class="n">bash_command</span> <span class="o">+=</span> <span class="s1">&#39; --use_case </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;text_classification&#39;</span><span class="p">)</span>
         <span class="n">bash_command</span> <span class="o">+=</span> <span class="s1">&#39; --epochs </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">epochs</span><span class="p">)</span>
         <span class="n">bash_command</span> <span class="o">+=</span> <span class="s1">&#39; --batch_size </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)</span>
@@ -526,7 +541,6 @@
                 <span class="n">per_device_train_batch_size</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;preprocessing_info&#39;</span><span class="p">][</span><span class="s1">&#39;batch_size&#39;</span><span class="p">],</span>
                 <span class="n">evaluation_strategy</span><span class="o">=</span><span class="s2">&quot;epoch&quot;</span><span class="p">,</span>
                 <span class="n">num_train_epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span>
-                <span class="n">max_steps</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span>
             <span class="p">)</span>
 
             <span class="k">def</span> <span class="nf">compute_metrics</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="n">EvalPrediction</span><span class="p">):</span>
@@ -550,11 +564,18 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_history</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_trainer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Val Acc: </span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_history</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eval_accuracy&quot;</span><span class="p">)))</span>
         <span class="k">elif</span> <span class="n">distributed</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">export_for_distributed</span><span class="p">(</span>
-                <span class="n">output_dir</span><span class="o">=</span><span class="n">TLT_DISTRIBUTED_DIR</span><span class="p">,</span> <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span>
-            <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_fit_distributed</span><span class="p">(</span><span class="n">hostfile</span><span class="p">,</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">nproc_per_node</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">dataset</span><span class="o">.</span><span class="n">_preprocessed</span><span class="p">[</span><span class="s2">&quot;batch_size&quot;</span><span class="p">],</span>
-                                  <span class="n">ipex_optimize</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">saved_objects_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">export_for_distributed</span><span class="p">(</span>
+                    <span class="n">export_dir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s1">&#39;tlt_saved_objects&#39;</span><span class="p">),</span>
+                    <span class="n">train_data</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">train_subset</span><span class="p">,</span>
+                    <span class="n">val_data</span><span class="o">=</span><span class="n">dataset</span><span class="o">.</span><span class="n">validation_subset</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_fit_distributed</span><span class="p">(</span><span class="n">saved_objects_dir</span><span class="p">,</span> <span class="n">hostfile</span><span class="p">,</span> <span class="n">nnodes</span><span class="p">,</span> <span class="n">nproc_per_node</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span>
+                                      <span class="n">dataset</span><span class="o">.</span><span class="n">_preprocessed</span><span class="p">[</span><span class="s2">&quot;batch_size&quot;</span><span class="p">],</span> <span class="n">ipex_optimize</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s2"> occured while distributed training&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_saved_objects_for_distributed</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_trainer</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
@@ -731,202 +752,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">dill</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">model_copy</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PyTorchHFTextClassificationModel.write_inc_config_file"><a class="viewcode-back" href="../../../../_autosummary/tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.write_inc_config_file.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.write_inc_config_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_inc_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file_path</span><span class="p">,</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                              <span class="n">resize_interpolation</span><span class="o">=</span><span class="s1">&#39;bicubic&#39;</span><span class="p">,</span> <span class="n">accuracy_criterion_relative</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">exit_policy_timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-                              <span class="n">exit_policy_max_trials</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">tuning_random_seed</span><span class="o">=</span><span class="mi">9527</span><span class="p">,</span>
-                              <span class="n">tuning_workspace</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Writes an INC compatible config file to the specified path usings args from the specified dataset and</span>
-<span class="sd">        parameters.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            config_file_path (str): Destination path on where to write the .yaml config file.</span>
-<span class="sd">            dataset (BaseDataset): A tlt dataset object</span>
-<span class="sd">            batch_size (int): Batch size to use for quantization and evaluation</span>
-<span class="sd">            overwrite (bool): Specify whether or not to overwrite the config_file_path, if it already exists</span>
-<span class="sd">                              (default: False)</span>
-<span class="sd">            resize_interpolation (str): Interpolation type. Select from: &#39;bilinear&#39;, &#39;nearest&#39;, &#39;bicubic&#39;</span>
-<span class="sd">                                        (default: bicubic)</span>
-<span class="sd">            accuracy_criterion_relative (float): Relative accuracy loss (default: 0.01, which is 1%)</span>
-<span class="sd">            exit_policy_timeout (int): Tuning timeout in seconds (default: 0). Tuning processing finishes when the</span>
-<span class="sd">                                       timeout or max_trials is reached. A tuning timeout of 0 means that the tuning</span>
-<span class="sd">                                       phase stops when the accuracy criterion is met.</span>
-<span class="sd">            exit_policy_max_trials (int): Maximum number of tuning trials (default: 50). Tuning processing finishes when</span>
-<span class="sd">                                          the timeout or or max_trials is reached.</span>
-<span class="sd">            tuning_random_seed (int): Random seed for deterministic tuning (default: 9527).</span>
-<span class="sd">            tuning_workspace (dir): Path the INC nc_workspace folder. If the string is empty and the OUTPUT_DIR env var</span>
-<span class="sd">                                    is set, that output directory will be used. If the string is empty and the</span>
-<span class="sd">                                    OUTPUT_DIR env var is not set, the default INC nc_workspace location will be used.</span>
-<span class="sd">        Returns:</span>
-<span class="sd">            None</span>
-<span class="sd">        Raises:</span>
-<span class="sd">            FileExistsError: if the config file already exists and overwrite is set to False.</span>
-<span class="sd">            ValueError: if the parameters are not within the expected values</span>
-<span class="sd">            NotImplementedError: if the dataset type is not HFCustomImageClassificationDataset.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="s1">&#39;A file already exists at: </span><span class="si">{}</span><span class="s1">. Provide a new file path or set overwrite=True&#39;</span><span class="p">,</span>
-                                  <span class="n">config_file_path</span><span class="p">)</span>
-
-        <span class="c1"># They don&#39;t have a PyTorch Dataset option, so for now, we only support custom datasets for quantization</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">HFCustomTextClassificationDataset</span><span class="p">)</span> <span class="ow">or</span> \
-                <span class="n">dataset</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">HFCustomTextClassificationDataset</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;quantization has only been implemented for huggingface text classification &#39;</span>
-                                      <span class="s1">&#39;models with custom datasets&#39;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">batch_size</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">batch_size</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid value for batch size (</span><span class="si">{}</span><span class="s1">). Expected a positive integer.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">batch_size</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">resize_interpolation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="s1">&#39;bicubic&#39;</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid value for resize interpolation (</span><span class="si">{}</span><span class="s1">). Expected one of the following values: &#39;</span>
-                             <span class="s1">&#39;bilinear, nearest, bicubic&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resize_interpolation</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">accuracy_criterion_relative</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">accuracy_criterion_relative</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> \
-                <span class="ow">not</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="n">accuracy_criterion_relative</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid value for the accuracy criterion (</span><span class="si">{}</span><span class="s1">). Expected a float value between 0.0 &#39;</span>
-                             <span class="s1">&#39;and 1.0&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">accuracy_criterion_relative</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">exit_policy_timeout</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exit_policy_timeout</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">exit_policy_timeout</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid value for the exit policy timeout (</span><span class="si">{}</span><span class="s1">). Expected a positive integer or 0.&#39;</span><span class="o">.</span>
-                             <span class="nb">format</span><span class="p">(</span><span class="n">exit_policy_timeout</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">exit_policy_max_trials</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exit_policy_max_trials</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">exit_policy_max_trials</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid value for max trials (</span><span class="si">{}</span><span class="s1">). Expected an integer greater than 0.&#39;</span><span class="o">.</span>
-                             <span class="nb">format</span><span class="p">(</span><span class="n">exit_policy_timeout</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">tuning_random_seed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tuning_random_seed</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="n">tuning_random_seed</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid value for tuning random seed (</span><span class="si">{}</span><span class="s1">). Expected a positive integer.&#39;</span><span class="o">.</span>
-                             <span class="nb">format</span><span class="p">(</span><span class="n">tuning_random_seed</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tuning_workspace</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid value for the nc_workspace directory. Expected a string.&#39;</span><span class="p">)</span>
-
-        <span class="c1"># Get the Intel Neural Compressor template</span>
-        <span class="n">config_template</span> <span class="o">=</span> <span class="n">TextClassificationModel</span><span class="o">.</span><span class="n">get_inc_config_template_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-        <span class="c1"># Collect the different data loaders into a list, so that we can update them all the with the data transforms</span>
-        <span class="n">dataloader_configs</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="c1"># If tuning_workspace is undefined, use the OUTPUT_DIR, if the env var exists</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">tuning_workspace</span><span class="p">:</span>
-            <span class="n">output_dir_env_var</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;OUTPUT_DIR&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="n">output_dir_env_var</span><span class="p">:</span>
-                <span class="n">tuning_workspace</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir_env_var</span><span class="p">,</span> <span class="s1">&#39;nc_workspace&#39;</span><span class="p">)</span>
-
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tuning_workspace:&quot;</span><span class="p">,</span> <span class="n">tuning_workspace</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="s2">&quot;quantization&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;calibration&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;quantization&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> \
-                <span class="ow">and</span> <span class="s2">&quot;dataloader&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;quantization&quot;</span><span class="p">][</span><span class="s2">&quot;calibration&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="n">dataloader_configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;quantization&quot;</span><span class="p">][</span><span class="s2">&quot;calibration&quot;</span><span class="p">][</span><span class="s2">&quot;dataloader&quot;</span><span class="p">])</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DATALOADER CONFIGS&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">dataloader_configs</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="s2">&quot;evaluation&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">if</span> <span class="s2">&quot;accuracy&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;evaluation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> \
-                    <span class="s2">&quot;dataloader&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;evaluation&quot;</span><span class="p">][</span><span class="s2">&quot;accuracy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">dataloader_configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;evaluation&quot;</span><span class="p">][</span><span class="s2">&quot;accuracy&quot;</span><span class="p">][</span><span class="s2">&quot;dataloader&quot;</span><span class="p">])</span>
-            <span class="k">if</span> <span class="s2">&quot;performance&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;evaluation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> \
-                    <span class="s2">&quot;dataloader&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;evaluation&quot;</span><span class="p">][</span><span class="s2">&quot;performance&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">dataloader_configs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;evaluation&quot;</span><span class="p">][</span><span class="s2">&quot;performance&quot;</span><span class="p">][</span><span class="s2">&quot;dataloader&quot;</span><span class="p">])</span>
-
-        <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;quantization&quot;</span><span class="p">][</span><span class="s2">&quot;approach&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;post_training_dynamic_quant&quot;</span>
-
-        <span class="c1"># Update the data loader configs</span>
-        <span class="k">for</span> <span class="n">dataloader_config</span> <span class="ow">in</span> <span class="n">dataloader_configs</span><span class="p">:</span>
-            <span class="c1"># Update dataset directory for the custom dataset</span>
-            <span class="k">if</span> <span class="s2">&quot;dataset&quot;</span> <span class="ow">in</span> <span class="n">dataloader_config</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="s2">&quot;bert&quot;</span> <span class="ow">in</span> <span class="n">dataloader_config</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="c1"># These cause errors when trying to benchmark</span>
-                <span class="n">dataloader_config</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">][</span><span class="s2">&quot;bert&quot;</span><span class="p">][</span><span class="s2">&quot;root&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">dataset_dir</span>
-                <span class="n">dataloader_config</span><span class="p">[</span><span class="s2">&quot;dataset&quot;</span><span class="p">][</span><span class="s2">&quot;bert&quot;</span><span class="p">][</span><span class="s2">&quot;label_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">dataset_dir</span>
-
-            <span class="n">dataloader_config</span><span class="p">[</span><span class="s2">&quot;batch_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">batch_size</span>
-
-        <span class="k">if</span> <span class="s2">&quot;tuning&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;accuracy_criterion&quot;</span><span class="p">][</span><span class="s2">&quot;relative&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_criterion_relative</span>
-
-            <span class="k">if</span> <span class="n">exit_policy_timeout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;exit_policy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;exit_policy&quot;</span><span class="p">][</span><span class="s2">&quot;timeout&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exit_policy_timeout</span>
-
-            <span class="k">if</span> <span class="n">exit_policy_max_trials</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;exit_policy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;max_trials&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;exit_policy&quot;</span><span class="p">][</span><span class="s2">&quot;max_trials&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exit_policy_max_trials</span>
-
-            <span class="k">if</span> <span class="n">tuning_random_seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;random_seed&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;random_seed&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tuning_random_seed</span>
-
-            <span class="k">if</span> <span class="n">tuning_workspace</span><span class="p">:</span>
-                <span class="k">if</span> <span class="s2">&quot;workspace&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;workspace&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-
-                <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;workspace&quot;</span><span class="p">][</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tuning_workspace</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># No tuning_workspace is defined, so remove it from the config</span>
-                <span class="k">if</span> <span class="s2">&quot;workspace&quot;</span> <span class="ow">in</span> <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;workspace&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
-                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">][</span><span class="s2">&quot;workspace&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">config_template</span><span class="p">[</span><span class="s2">&quot;tuning&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;workspace&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
-        <span class="c1"># Create the directory where the file will be written, if it doesn&#39;t already exist</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">)):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">))</span>
-
-        <span class="c1"># Write the config file</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config_file</span><span class="p">:</span>
-            <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config_template</span><span class="p">,</span> <span class="n">config_file</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="PyTorchHFTextClassificationModel.quantize"><a class="viewcode-back" href="../../../../_autosummary/tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize.html#tlt.models.text_classification.pytorch_hf_text_classification_model.PyTorchHFTextClassificationModel.quantize">[docs]</a>    <span class="k">def</span> <span class="nf">quantize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_dir</span><span class="p">,</span> <span class="n">inc_config_path</span><span class="p">,</span> <span class="n">overwrite_model</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Performs post training quantization using the Intel Neural Compressor on the model</span>
-<span class="sd">        using the specified config file. The quantized model is written to the output directory.</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">            output_dir (str): Writable output directory to save the quantized model</span>
-<span class="sd">            inc_config_path (str): Path to an INC config file (.yaml)</span>
-<span class="sd">            overwrite (bool): Specify whether or not to overwrite the output_dir, if it already exists</span>
-<span class="sd">                              (default: False)</span>
-
-<span class="sd">        Returns:</span>
-<span class="sd">            None</span>
-
-<span class="sd">        Raises:</span>
-<span class="sd">            FileNotFoundError: if a model.pt is not found in the model or if the inc_config_path file</span>
-<span class="sd">            is not found.</span>
-<span class="sd">            FileExistsError: if the output_dir already has a model.pt file</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Verify that the config file exists</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">inc_config_path</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="s2">&quot;The config file was not found at: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inc_config_path</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">output_dir</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Verify that the output directory doesn&#39;t already have a saved_model.pb file</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;model.pt&quot;</span><span class="p">))</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">overwrite_model</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">FileExistsError</span><span class="p">(</span><span class="s2">&quot;A saved model already exists at:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;model.pt&quot;</span><span class="p">))</span>
-
-        <span class="kn">from</span> <span class="nn">neural_compressor.experimental</span> <span class="kn">import</span> <span class="n">Quantization</span>
-
-        <span class="n">quantizer</span> <span class="o">=</span> <span class="n">Quantization</span><span class="p">(</span><span class="n">inc_config_path</span><span class="p">)</span>
-        <span class="n">quantizer</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span>
-        <span class="n">quantized_model</span> <span class="o">=</span> <span class="n">quantizer</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-
-        <span class="c1"># If quantization was successful, save the model</span>
-        <span class="k">if</span> <span class="n">quantized_model</span><span class="p">:</span>
-            <span class="n">quantized_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
-            <span class="kn">import</span> <span class="nn">subprocess</span>
-            <span class="c1"># Change the model filename from best_model.pt to model.pt to match our convention</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s2">&quot;mv&quot;</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&quot;/best_model.pt&quot;</span><span class="p">,</span> <span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&quot;/model.pt&quot;</span><span class="p">],</span>
-                                 <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
-            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span></div>
-
     <span class="k">def</span> <span class="nf">list_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Lists all of the named modules (e.g. features, avgpool, classifier) and layers</span>
@@ -1005,7 +830,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

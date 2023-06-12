@@ -1,6 +1,0 @@
-﻿tlt.models.image\_classification.tfhub\_image\_classification\_model.TFHubImageClassificationModel.get\_inc\_config
-===================================================================================================================
-
-.. currentmodule:: tlt.models.image_classification.tfhub_image_classification_model
-
-.. automethod:: TFHubImageClassificationModel.get_inc_config

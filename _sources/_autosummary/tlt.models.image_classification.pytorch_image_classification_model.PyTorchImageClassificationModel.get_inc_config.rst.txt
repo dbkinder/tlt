@@ -1,6 +1,0 @@
-﻿tlt.models.image\_classification.pytorch\_image\_classification\_model.PyTorchImageClassificationModel.get\_inc\_config
-=======================================================================================================================
-
-.. currentmodule:: tlt.models.image_classification.pytorch_image_classification_model
-
-.. automethod:: PyTorchImageClassificationModel.get_inc_config

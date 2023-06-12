@@ -15,11 +15,11 @@
    
       ~PyTorchHFTextClassificationModel.__init__
       ~PyTorchHFTextClassificationModel.benchmark
+      ~PyTorchHFTextClassificationModel.cleanup_saved_objects_for_distributed
       ~PyTorchHFTextClassificationModel.evaluate
       ~PyTorchHFTextClassificationModel.export
       ~PyTorchHFTextClassificationModel.export_for_distributed
       ~PyTorchHFTextClassificationModel.freeze_layer
-      ~PyTorchHFTextClassificationModel.get_inc_config_template_dict
       ~PyTorchHFTextClassificationModel.list_layers
       ~PyTorchHFTextClassificationModel.load_from_directory
       ~PyTorchHFTextClassificationModel.optimize_graph
@@ -27,7 +27,6 @@
       ~PyTorchHFTextClassificationModel.quantize
       ~PyTorchHFTextClassificationModel.train
       ~PyTorchHFTextClassificationModel.unfreeze_layer
-      ~PyTorchHFTextClassificationModel.write_inc_config_file
    
    
 

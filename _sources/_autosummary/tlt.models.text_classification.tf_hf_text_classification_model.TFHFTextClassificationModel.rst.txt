@@ -19,14 +19,12 @@
       ~TFHFTextClassificationModel.evaluate
       ~TFHFTextClassificationModel.export
       ~TFHFTextClassificationModel.export_for_distributed
-      ~TFHFTextClassificationModel.get_inc_config_template_dict
       ~TFHFTextClassificationModel.load_from_directory
       ~TFHFTextClassificationModel.optimize_graph
       ~TFHFTextClassificationModel.predict
       ~TFHFTextClassificationModel.quantize
       ~TFHFTextClassificationModel.set_auto_mixed_precision
       ~TFHFTextClassificationModel.train
-      ~TFHFTextClassificationModel.write_inc_config_file
    
    
 

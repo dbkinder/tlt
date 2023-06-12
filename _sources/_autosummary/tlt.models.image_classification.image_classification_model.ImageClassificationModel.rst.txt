@@ -17,7 +17,6 @@
       ~ImageClassificationModel.benchmark
       ~ImageClassificationModel.evaluate
       ~ImageClassificationModel.export
-      ~ImageClassificationModel.get_inc_config
       ~ImageClassificationModel.load_from_directory
       ~ImageClassificationModel.optimize_graph
       ~ImageClassificationModel.predict

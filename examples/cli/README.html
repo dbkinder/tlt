@@ -203,12 +203,11 @@ each run).</p>
 <p>Benchmark the performance of the trained model using <code class="docutils literal notranslate"><span class="pre">tlt</span> <span class="pre">benchmark</span></code>.  Make sure
 to specify your own file paths for <code class="docutils literal notranslate"><span class="pre">model-dir</span></code> (including the numbered folder).
 The <code class="docutils literal notranslate"><span class="pre">dataset-dir</span></code> should point to the extracted dataset folder.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tlt benchmark --model-dir /tmp/output/resnet_v1_50/1 --dataset-dir ${DATASET_DIR} --batch-size 512 --mode performance
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tlt benchmark --model-dir /tmp/output/resnet_v1_50/1 --dataset-dir ${DATASET_DIR} --batch-size 512
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span> <span class="n">directory</span><span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">resnet_v1_50</span><span class="o">/</span><span class="mi">1</span>
 <span class="n">Dataset</span> <span class="n">directory</span><span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">dataset</span><span class="o">/</span><span class="n">flower_photos</span>
-<span class="n">Benchmarking</span> <span class="n">mode</span><span class="p">:</span> <span class="n">performance</span>
 <span class="n">Batch</span> <span class="n">size</span><span class="p">:</span> <span class="mi">512</span>
 <span class="n">Model</span> <span class="n">name</span><span class="p">:</span> <span class="n">resnet_v1_50</span>
 <span class="n">Framework</span><span class="p">:</span> <span class="n">tensorflow</span>
@@ -275,7 +274,7 @@ INFO:tensorflow:SavedModel written to: /tmp/output/quantized/resnet_v1_50/1/save
 to the quantized model directory.
 Make sure to specify your own file paths for <code class="docutils literal notranslate"><span class="pre">model-dir</span></code> and <code class="docutils literal notranslate"><span class="pre">dataset-dir</span></code>. You can then compare
 the performance of the full precision model to the quantized model.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tlt benchmark --model-dir /tmp/output/quantized/resnet_v1_50/1 --dataset-dir ${DATASET_DIR} --batch-size 512 --mode performance
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>tlt benchmark --model-dir /tmp/output/quantized/resnet_v1_50/1 --dataset-dir ${DATASET_DIR} --batch-size 512
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span> <span class="n">directory</span><span class="p">:</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">output</span><span class="o">/</span><span class="n">quantized</span><span class="o">/</span><span class="n">resnet_v1_50</span><span class="o">/</span><span class="mi">1</span>
@@ -335,7 +334,7 @@ Note that graph optimization is also done as part of the quantization flow, so t
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

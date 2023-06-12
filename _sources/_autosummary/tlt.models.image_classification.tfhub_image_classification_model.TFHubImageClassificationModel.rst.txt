@@ -19,7 +19,6 @@
       ~TFHubImageClassificationModel.evaluate
       ~TFHubImageClassificationModel.export
       ~TFHubImageClassificationModel.export_for_distributed
-      ~TFHubImageClassificationModel.get_inc_config
       ~TFHubImageClassificationModel.load_from_directory
       ~TFHubImageClassificationModel.optimize_graph
       ~TFHubImageClassificationModel.predict

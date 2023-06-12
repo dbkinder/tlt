@@ -213,7 +213,7 @@
 <span class="sd">            dataset (ImageClassificationDataset): dataset to quantize with</span>
 <span class="sd">            config (PostTrainingQuantConfig): Optional, for customizing the quantization parameters</span>
 <span class="sd">            overwrite_model (bool): Specify whether or not to overwrite the output_dir, if it already exists</span>
-<span class="sd">                              (default: False)</span>
+<span class="sd">                                    (default: False)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
@@ -234,18 +234,15 @@
 <span class="sd">        normalization ops into the pre-calculated weights, and fusing common operations into unified versions.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            saved_model_dir (str): Source directory for the model to optimize</span>
 <span class="sd">            output_dir (str): Writable output directory to save the optimized model</span>
 <span class="sd">            overwrite_model (bool): Specify whether or not to overwrite the output_dir, if it already exists</span>
-<span class="sd">                              (default: False)</span>
+<span class="sd">                                    (default: False)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            None</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            NotImplementedError: if the model does not support INC yet</span>
-<span class="sd">            NotADirectoryError: if the saved_model_dir is not a directory</span>
-<span class="sd">            FileNotFoundError: if a saved_model.pb is not found in the saved_model_dir</span>
 <span class="sd">            FileExistsError: if the output_dir already has a saved_model.pb file</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span>
@@ -288,7 +285,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

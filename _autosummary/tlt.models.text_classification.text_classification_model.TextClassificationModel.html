@@ -119,7 +119,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#tlt.models.text_classification.text_classification_model.TextClassificationModel.__init__" title="tlt.models.text_classification.text_classification_model.TextClassificationModel.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(model_name, framework, use_case, ...)</p></td>
 <td><p>Class constructor</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">benchmark</span></code>(saved_model_dir, inc_config_path)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.text_classification.text_classification_model.TextClassificationModel.benchmark.html#tlt.models.text_classification.text_classification_model.TextClassificationModel.benchmark" title="tlt.models.text_classification.text_classification_model.TextClassificationModel.benchmark"><code class="xref py py-obj docutils literal notranslate"><span class="pre">benchmark</span></code></a>(dataset[, saved_model_dir, ...])</p></td>
 <td><p>Use Intel Neural Compressor to benchmark the model with the dataset argument.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code>(dataset)</p></td>
@@ -128,26 +128,20 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">export</span></code>(output_dir)</p></td>
 <td><p>Export the serialized model to an output directory</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inc_config_template_dict</span></code>()</p></td>
-<td><p>Returns a dictionary for a config template compatible with the Intel Neural Compressor.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_directory</span></code>(model_dir)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_directory</span></code>(model_dir)</p></td>
 <td><p>Load a model from a directory</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir[, overwrite_model])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir[, overwrite_model])</p></td>
 <td><p>Performs FP32 graph optimization using the Intel Neural Compressor on the model and writes the inference-optimized model to the output_dir.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(input_samples)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(input_samples)</p></td>
 <td><p>Generates predictions for the input samples.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.text_classification.text_classification_model.TextClassificationModel.quantize.html#tlt.models.text_classification.text_classification_model.TextClassificationModel.quantize" title="tlt.models.text_classification.text_classification_model.TextClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, inc_config_path[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.text_classification.text_classification_model.TextClassificationModel.quantize.html#tlt.models.text_classification.text_classification_model.TextClassificationModel.quantize" title="tlt.models.text_classification.text_classification_model.TextClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, dataset[, config, ...])</p></td>
 <td><p>Performs post training quantization using the Intel Neural Compressor on the model using the dataset.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.text_classification.text_classification_model.TextClassificationModel.train.html#tlt.models.text_classification.text_classification_model.TextClassificationModel.train" title="tlt.models.text_classification.text_classification_model.TextClassificationModel.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(dataset, output_dir[, epochs, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.text_classification.text_classification_model.TextClassificationModel.train.html#tlt.models.text_classification.text_classification_model.TextClassificationModel.train" title="tlt.models.text_classification.text_classification_model.TextClassificationModel.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(dataset, output_dir[, epochs, ...])</p></td>
 <td><p>Train the model using the specified dataset</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.text_classification.text_classification_model.TextClassificationModel.write_inc_config_file.html#tlt.models.text_classification.text_classification_model.TextClassificationModel.write_inc_config_file" title="tlt.models.text_classification.text_classification_model.TextClassificationModel.write_inc_config_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_inc_config_file</span></code></a>(config_file_path, ...)</p></td>
-<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -197,7 +191,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

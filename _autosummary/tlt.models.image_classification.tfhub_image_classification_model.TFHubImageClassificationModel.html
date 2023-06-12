@@ -119,7 +119,7 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.__init__" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(model_name, **kwargs)</p></td>
 <td><p>Class constructor</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">benchmark</span></code>(dataset[, saved_model_dir, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.benchmark.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.benchmark" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.benchmark"><code class="xref py py-obj docutils literal notranslate"><span class="pre">benchmark</span></code></a>(dataset[, saved_model_dir, ...])</p></td>
 <td><p>Use Intel Neural Compressor to benchmark the model with the dataset argument.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cleanup_saved_objects_for_distributed</span></code>()</p></td>
@@ -134,25 +134,22 @@
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_for_distributed</span></code>([export_dir, ...])</p></td>
 <td><p>Exports the model, optimizer, loss, train data and validation data to the export_dir for distributed script to access.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.get_inc_config.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.get_inc_config" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.get_inc_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inc_config</span></code></a>([...])</p></td>
-<td><p>Creates an INC post-training quantization config from the specified parameters.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_directory</span></code>(model_dir)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_from_directory</span></code>(model_dir)</p></td>
 <td><p>Loads a saved model from the specified directory</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir[, overwrite_model])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.optimize_graph.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.optimize_graph" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.optimize_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code></a>(output_dir[, overwrite_model])</p></td>
 <td><p>Performs FP32 graph optimization using the Intel Neural Compressor on the model and writes the inference-optimized model to the output_dir.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(input_samples[, return_type, callbacks])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(input_samples[, return_type, callbacks])</p></td>
 <td><p>Perform feed-forward inference and predict the classes of the input_samples.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, dataset[, config, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.quantize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quantize</span></code></a>(output_dir, dataset[, config, ...])</p></td>
 <td><p>Performs post training quantization using the Intel Neural Compressor on the model using the dataset.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_mixed_precision</span></code>(...)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_auto_mixed_precision</span></code>(...)</p></td>
 <td><p>Enable auto mixed precision for training.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.train.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.train" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(dataset, output_dir[, epochs, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.train.html#tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.train" title="tlt.models.image_classification.tfhub_image_classification_model.TFHubImageClassificationModel.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(dataset, output_dir[, epochs, ...])</p></td>
 <td><p>Trains the model using the specified image classification dataset.</p></td>
 </tr>
 </tbody>
@@ -215,7 +212,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

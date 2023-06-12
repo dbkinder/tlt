@@ -19,7 +19,6 @@
       ~TFImageClassificationModel.evaluate
       ~TFImageClassificationModel.export
       ~TFImageClassificationModel.export_for_distributed
-      ~TFImageClassificationModel.get_inc_config
       ~TFImageClassificationModel.load_from_directory
       ~TFImageClassificationModel.optimize_graph
       ~TFImageClassificationModel.predict

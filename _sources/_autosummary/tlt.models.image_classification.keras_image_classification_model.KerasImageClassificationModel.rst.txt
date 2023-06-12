@@ -19,7 +19,6 @@
       ~KerasImageClassificationModel.evaluate
       ~KerasImageClassificationModel.export
       ~KerasImageClassificationModel.export_for_distributed
-      ~KerasImageClassificationModel.get_inc_config
       ~KerasImageClassificationModel.load_from_directory
       ~KerasImageClassificationModel.optimize_graph
       ~KerasImageClassificationModel.predict

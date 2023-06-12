@@ -176,16 +176,19 @@ exclude_cols can be specified.</p></li>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_batch</span></code>([subset])</p></td>
 <td><p>Get a single batch of images and labels from the dataset.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_str_label</span></code>(numerical_value)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inc_dataloaders</span></code>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_str_label</span></code>(numerical_value)</p></td>
 <td><p>Returns the string label (class name) associated with the specified numerical value.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_text</span></code>(input_ids)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_text</span></code>(input_ids)</p></td>
 <td><p>Helper function to decode the input_ids to text</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess</span></code>(model_name[, batch_size, ...])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess</span></code>(model_name[, batch_size, ...])</p></td>
 <td><p>Preprocess the textual dataset to apply padding, truncation and tokenize.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shuffle_split</span></code>([train_pct, val_pct, ...])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">shuffle_split</span></code>([train_pct, val_pct, ...])</p></td>
 <td><p>Randomly split the dataset into train, validation, and test subsets with a pseudo-random seed option.</p></td>
 </tr>
 </tbody>
@@ -251,7 +254,7 @@ exclude_cols can be specified.</p></li>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

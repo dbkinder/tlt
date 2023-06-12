@@ -15,6 +15,7 @@
    
       ~HFTextClassificationDataset.__init__
       ~HFTextClassificationDataset.get_batch
+      ~HFTextClassificationDataset.get_inc_dataloaders
       ~HFTextClassificationDataset.get_str_label
       ~HFTextClassificationDataset.get_text
       ~HFTextClassificationDataset.load_hf_dataset

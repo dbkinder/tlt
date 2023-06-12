@@ -1,6 +1,0 @@
-﻿tlt.models.text\_classification.tf\_text\_classification\_model.TFTextClassificationModel.write\_inc\_config\_file
-==================================================================================================================
-
-.. currentmodule:: tlt.models.text_classification.tf_text_classification_model
-
-.. automethod:: TFTextClassificationModel.write_inc_config_file

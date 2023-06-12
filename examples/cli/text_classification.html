@@ -109,7 +109,7 @@ columns are being used, the CLI only allows using .csv files in the expected for
 <code class="docutils literal notranslate"><span class="pre">--dataset-file</span></code> is the name of the .csv file to load from that directory. Use the <code class="docutils literal notranslate"><span class="pre">--class-names</span></code>
 argument to specify a list of the classes and the <code class="docutils literal notranslate"><span class="pre">--delimiter</span></code> to specify the character that
 separates the two columns. If no <code class="docutils literal notranslate"><span class="pre">--delimiter</span></code> is specified, the CLI will default to use a comma (<code class="docutils literal notranslate"><span class="pre">,</span></code>).</p>
-<p>This example is downloading the <a class="reference external" href="https://archive-beta.ics.uci.edu/dataset/228/sms+spam+collection">SMS Spam Collection</a>
+<p>This example is downloading the <a class="reference external" href="https://archive.ics.uci.edu/dataset/228/sms+spam+collection">SMS Spam Collection</a>
 dataset, which has a tab separated value file in the .zip file. This dataset has labeled SMS text
 messages that are either being classified as <code class="docutils literal notranslate"><span class="pre">ham</span></code> or <code class="docutils literal notranslate"><span class="pre">spam</span></code>. The first column in the data file has
 the label (<code class="docutils literal notranslate"><span class="pre">ham</span></code> or <code class="docutils literal notranslate"><span class="pre">spam</span></code>) and the second column is the text of the SMS message. The string class
@@ -121,8 +121,8 @@ mkdir<span class="w"> </span>-p<span class="w"> </span><span class="si">${</span
 mkdir<span class="w"> </span>-p<span class="w"> </span><span class="si">${</span><span class="nv">OUTPUT_DIR</span><span class="si">}</span>
 
 <span class="c1"># Download and extract the dataset</span>
-wget<span class="w"> </span>-P<span class="w"> </span><span class="si">${</span><span class="nv">DATASET_DIR</span><span class="si">}</span><span class="w"> </span>https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip
-unzip<span class="w"> </span><span class="si">${</span><span class="nv">DATASET_DIR</span><span class="si">}</span>/smsspamcollection.zip
+wget<span class="w"> </span>-P<span class="w"> </span><span class="si">${</span><span class="nv">DATASET_DIR</span><span class="si">}</span><span class="w"> </span>https://archive.ics.uci.edu/static/public/228/sms+spam+collection.zip
+unzip<span class="w"> </span><span class="si">${</span><span class="nv">DATASET_DIR</span><span class="si">}</span>/sms+spam+collection.zip
 
 <span class="c1"># Make a copy of the .csv file with &#39;numerical&#39; in the file name</span>
 <span class="nv">DATASET_FILE</span><span class="o">=</span>SMSSpamCollection_numerical.csv
@@ -293,7 +293,7 @@ tlt<span class="w"> </span>train<span class="w"> </span><span class="se">\</span
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 

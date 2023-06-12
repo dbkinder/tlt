@@ -15,6 +15,7 @@
    
       ~HFCustomTextClassificationDataset.__init__
       ~HFCustomTextClassificationDataset.get_batch
+      ~HFCustomTextClassificationDataset.get_inc_dataloaders
       ~HFCustomTextClassificationDataset.get_str_label
       ~HFCustomTextClassificationDataset.get_text
       ~HFCustomTextClassificationDataset.preprocess

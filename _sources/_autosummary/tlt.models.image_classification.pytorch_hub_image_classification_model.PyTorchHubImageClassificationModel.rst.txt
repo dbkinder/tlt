@@ -15,11 +15,11 @@
    
       ~PyTorchHubImageClassificationModel.__init__
       ~PyTorchHubImageClassificationModel.benchmark
+      ~PyTorchHubImageClassificationModel.cleanup_saved_objects_for_distributed
       ~PyTorchHubImageClassificationModel.evaluate
       ~PyTorchHubImageClassificationModel.export
       ~PyTorchHubImageClassificationModel.export_for_distributed
       ~PyTorchHubImageClassificationModel.freeze_layer
-      ~PyTorchHubImageClassificationModel.get_inc_config
       ~PyTorchHubImageClassificationModel.list_layers
       ~PyTorchHubImageClassificationModel.load_from_directory
       ~PyTorchHubImageClassificationModel.optimize_graph

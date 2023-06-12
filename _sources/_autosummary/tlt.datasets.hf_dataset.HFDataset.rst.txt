@@ -15,6 +15,7 @@
    
       ~HFDataset.__init__
       ~HFDataset.get_batch
+      ~HFDataset.get_inc_dataloaders
       ~HFDataset.get_text
       ~HFDataset.preprocess
       ~HFDataset.shuffle_split

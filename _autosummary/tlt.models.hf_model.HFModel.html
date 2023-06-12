@@ -132,7 +132,7 @@
 <td><p>Load a model from a directory</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">optimize_graph</span></code>(output_dir[, overwrite_model])</p></td>
-<td><p>Performs FP32 graph optimization using the Intel Neural Compressor on the model and writes the inference-optimized model to the output_dir.</p></td>
+<td><p>Performs FP32 graph optimization using the Intel Neural Compressor on the model and writes the inference-optimized model to the output_dir. Graph optimization includes converting variables to constants, removing training-only operations like checkpoint saving, stripping out parts of the graph that are never reached, removing debug operations like CheckNumerics, folding batch normalization ops into the pre-calculated weights, and fusing common operations into unified versions. :param output_dir: Writable output directory to save the optimized model :type output_dir: str :param overwrite_model: Specify whether or not to overwrite the output_dir, if it already exists                         (default: False) :type overwrite_model: bool.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(input_samples)</p></td>
 <td><p>Generates predictions for the input samples.</p></td>
@@ -185,7 +185,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2022-2023, Intel Corporation.
-      <span class="lastupdated">Last updated on Jun 09, 2023.
+      <span class="lastupdated">Last updated on Jun 12, 2023.
       </span></p>
   </div>
 
